@@ -17,3 +17,8 @@
 /yarn-error.log
 
 .byebug_history
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json

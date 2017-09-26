@@ -1,0 +1,18 @@
+<div class="col-md-6 offset-md-3">
+
+<%= form_for(:session, url: login_path) do |f| %>
+<%# render 'shared/error_messages' %>
+  <div class="row">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="row">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+  
+<%= f.submit "Log In" %>
+<% end %>
+<p>New User? <%= link_to "Sign Up", signup_path %>
+</div>

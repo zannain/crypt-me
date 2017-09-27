@@ -9,7 +9,4 @@ RSpec.describe UsersController, type: :controller do
   expect(response).to redirect_to(:action => :show, :id=> assigns(:user).id)
   expect(User.count).to eq 1
   end
-
-  it "updates user information"
-  it "deletes a user from database"
 end

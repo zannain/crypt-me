@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe SessionsController, type: :controller do
+RSpec.describe StaticController, type: :controller do
 
-  describe "GET #new" do
+  describe "GET #index" do
     it "returns http success" do
-      get :new
+      get :index
       expect(response).to have_http_status(:success)
     end
+  end
 
-end
 end

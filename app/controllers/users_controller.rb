@@ -9,10 +9,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = "Welcome to Crypt Me"
+      log_in @user
+      flash.now[:success] = "Welcome to Crypt Me"
       redirect_to @user
     else
-      flash[:warning] = "Missing Information"
+      flash.now[:warning]
       render 'new'
     end
   end

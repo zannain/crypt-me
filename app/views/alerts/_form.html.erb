@@ -1,0 +1,51 @@
+<div>
+<%= form_with(model: @alert) do |f| %>
+    
+        <div>
+            <%= f.label :time %>
+            <%= f.text_field :created_at, class: "form-control", value: "#{DateTime.now.strftime('%I:%M')}"  %>
+        </div>
+
+        <div>
+            <%= f.label :currency %>
+            <%= f.text_field :currency, class: "form-control", value: "#{@currency}" %>
+        </div>
+
+
+        <div>
+            <%= f.label :current_value %>
+            <%= f.text_field :currency_value, class: "form-control", value: "#{@currency_value}"  %>
+        </div>
+
+
+        <div>
+            <%= f.label :minimum %>
+            <%= f.text_field :user_min, class: "form-control", placeholder: "Min new" %>
+        </div>
+
+        <div>
+            <%= f.label :maximum %>
+            <%= f.text_field :user_max, class: "form-control", placeholder: "Max new"  %>
+        </div>
+
+        <div>
+            <%= f.label :direction %>
+            <%= f.select :direction, ['up', 'down'], class: "form-control" %>
+        </div>
+
+        <div>
+            <%= f.label  :time_interval %>
+            <%= f.select :time_interval, ['hours', 'days', 'weeks'], class: "form-control" %>
+            </div>
+            <div>
+            <%= f.label  :time_value %>
+            <%= f.text_field :time_value , class: "form-control", placeholder: "Time Value" %>
+        </div>
+        
+            <%= f.hidden_field :crypto_id,  value: "#{@crypto_id}" %>
+
+        <div>
+        <%= f.submit "Create Alert" %>
+        </div>
+    <% end %>
+</div>

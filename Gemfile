@@ -15,6 +15,8 @@ gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'turbolinks', '~> 5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'uglifier', '>= 1.3.0'
+gem 'font-awesome-sass', '~> 4.7.0'
+gem 'jquery-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

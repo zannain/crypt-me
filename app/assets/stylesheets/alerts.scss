@@ -1,0 +1,40 @@
+// Place all the styles related to the alerts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.co
+
+.table {
+  font-family: 'Lato', sans-serif;
+  border: solid 1px black;
+}
+
+#dashboard_table {
+  background-color: white;
+  min-width: 100%;
+  margin-left: 17px;
+}
+
+#alert_me  a {
+  color: black;
+}
+.full_dashboard {
+ background-color:  #f5f7fa;
+ font-family: 'Lato', sans-serif;
+}
+.dashboard {
+  font-family: 'Cormorant Unicase', serif;
+  padding-bottom: 50px;
+  text-align: center;
+}
+
+.dashboard_header {
+  font-family: 'Lato', sans-serif;
+  font-size: 30px;
+  text-align: center;
+}
+
+#dashboard_pic {
+  position: relative;
+  background-color: white;
+  bottom: 100px;
+
+}

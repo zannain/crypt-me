@@ -1,11 +1,6 @@
-// Place all the styles related to the Static controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
 div {
   max-width: 100%;
 }
-
 #navheader {
   background: image-url("stockbackground.jpg")no-repeat center fixed;
   width: auto;
@@ -14,10 +9,13 @@ div {
   background-size: cover;
   background-repeat: no-repeat;
 }
+body {
 
-body {}
+}
 @media screen and (min-width: 736px) {
-  body {}
+  body {
+
+  }
 }
 
 .jumbo {
@@ -25,57 +23,34 @@ body {}
   font-family: 'Raleway Dots', cursive;
 }
 
-.about_second {
-  color: #555f77;
-  font-size: 16px;
-  text-align: left;
-  font-family: 'Lato', sans-serif;
+.lead {
+  font-family: 'Marcellus SC', serif;
 }
-.about_info {
-  font-family: 'Lato', sans-serif;
-  color: #555f77;
-  margin-top: 40px;
-  margin-bottom: 40px;
-  font-size: 18px;
-  font-weight:bold;
-}
+
 .alert-danger {
   font-size: 16px;
   text-align: center;
-  font-family: 'Lato', sans-serif;
-  text-align: center;
-  position: relative;
-  left: 20px;
-}
-
-.warning {
-  position: relative;
-  left: 20px;
+  font-family: 'Marcellus SC', serif;
 }
 
 form {
   width: auto;
-  margin: 0;
+  margin:0;
   background-color: ghostwhite;
-}
 
+}
 #aboutpage {
   position: relative;
   max-width: 300px;
-  margin: auto;
-  background-color: ghostwhite;
-  color: black;
-  border: black;
+  margin: 0;
 }
 
 #loginModal > div > div > div.modal-body > a {
   color: black;
 }
-
 .form-control {
   width: auto;
 }
-
 .jumbotron {
   background-color: ghostwhite;
 }
@@ -145,13 +120,16 @@ div#tswcontent {
 }
 
 div#header_container {
-  margin-top: 100px;
-  background-color: rgba(0,0,0,.7);
-  background-size: cover;
-  height: 300px;
-  margin-bottom: 100px;
-  min-width: 100%;
+   margin-top: 100px;
+    background-color: rgba(0,0,0,.7);
+    background-size: cover;
+    height: 300px;
+    margin-bottom: 100px;
+    min-width: 100%;
+
 }
+
+
 @media only screen and (min-width:736px) {
   div#crypto_header {
     margin-top: 100px;
@@ -262,7 +240,6 @@ header {
 .panel-default > .panel-heading {
   background-color: white;
 }
-
 .homepage {
   background: image-url("stockbackground.jpg")no-repeat center fixed;
   -webkit-background-size: cover;
@@ -270,8 +247,8 @@ header {
   -o-background-size: cover;
   background-size: cover;
   min-height: 100%;
-}
 
+}
 .homepagebody {
   color: rgba(0,0,0,.5);
 }
@@ -311,77 +288,12 @@ header {
   border-style: double;
 }
 
+
+
 .modal-body {
   background-color: ghostwhite;
 }
 
-
-.about_headline {
-  text-align: center;
-  margin-top: 50px;
-  margin-bottom: 2.5rem;
-  color: #555f77;
-  font-family: 'Cormorant Unicase', serif;
-}
-.card-lg {
-  padding: 4rem;
-}
-
-.card {
-    background: #fff;
-    margin-bottom: 2rem;
-}
-
-
-.about_first {
-  text-align: center;
-  font-family: 'Lato', sans-serif;
-  margin-bottom: 1.5rem;
-  font-size:18px;
-  margin-left:auto;
-  color: #555f77;
-  margin-right: auto;
-}
-
-.about_row {
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: -10px;
-  margin-right: -10px;
-}
-@media (min-width: 1200px) {
-  .about_container {
-    max-width: 1200px;
-  }
-}
-
-.about_container {
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-.about_body {
- background-color: #f5f7fa;
- font-family: 'Cormorant Unicase', serif;
-}
-
-.m-x-auto {
-    margin-right: auto !important;
-    margin-left: auto !important;
-}
-
-@media (min-width: 960px) {
-.col-lg-10 {
-    position: relative;
-    min-height: 1px;
-    padding-right: 10px;
-    padding-left: 10px;
-    flex: 0 0 83.33333%;
-    max-width: 83.33333%;
-  }
-}
-.form-control {
-  width:auto;
+label {
+  font-family: 'Marcellus SC', serif;
 }

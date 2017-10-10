@@ -1,0 +1,5 @@
+test:
+  name: Test Example
+  email: michael@example.com
+  phone_number: Faker::PhoneNumber.cell_phone
+  password_digest: <%= BCrypt::Password.create("password") %>

@@ -11,7 +11,7 @@ class AlertsController < ApplicationController
 
 # list current_user alerts
   def index
-    @alerts = current_user.alerts
+    @alerts = Alert.all
   end
 
 # receives params for a new alert

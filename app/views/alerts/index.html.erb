@@ -1,3 +1,5 @@
+
+
 <div class="full_dashboard">
   <h1 class="dashboard">Welcome <%= "#{current_user.name}"%></h1>
   <div class="row">
@@ -15,11 +17,11 @@
         </tr>
         <% @alerts.each do |alert| %>
           <tr>
-            <td><%=alert.currency%></td>
-            <td><%= alert.get_value(price_usd)%></td>
-            <td><%=alert.currency_value%></td>
+            <td><%= alert.currency%></td>
+            <td><%= alert.get_value(self)%></td>
+            <td><%= "$#{alert.currency_value}" %></td>
             <td><%= number_to_percentage(alert.percent_changed) %></td>
-            <td><%=alert.direction%></td>
+            <td><%= alert.direction.capitalize %></td>
           </tr>
         <% end %>
       </table>

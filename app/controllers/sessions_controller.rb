@@ -1,4 +1,8 @@
 class SessionsController < ApplicationController
+  before_action :new_user, only: [:index]
+
+  def index
+  end
   # GET, creates a new session
   def new
 
@@ -24,5 +28,8 @@ class SessionsController < ApplicationController
   private
   def sessions_params
     params.require(:session).permit(:email, :password)
+  end
+  def new_user
+    @user = User.new
   end
 end

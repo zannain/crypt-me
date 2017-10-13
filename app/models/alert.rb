@@ -28,9 +28,9 @@ end
   #Checks interval set by user and sets an expiration interval
   def expiration_timestamp
     case time_interval
-      when "hours" then Time.now + time_value.hours
-      when 'days' then  Time.now + time_value.days
-      when 'weeks' then  Time.now + time_value.weeks
+      when "hours" then self.created_at # + time_value.hours
+      when 'days' then  Time.now # + time_value.days
+      when 'weeks' then  Time.now # + time_value.weeks
     end
   end
 

@@ -1,7 +1,8 @@
+<% provide(:title) %>
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CryptMe</title>
+    <title><%= yield(:title) %> | CryptMe</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -19,6 +20,7 @@
   <body>
     <div class="container">
     <%= render 'shared/nav' %>
+    <%= render 'layouts/carousel' %>
     <%= render 'shared/flash' %>
     <%= yield %>
     <%= debug(params) if Rails.env.development? %>

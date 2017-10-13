@@ -1,7 +1,12 @@
 require 'bigdecimal/util'
 
 class Alert < ApplicationRecord
-  # belongs_to :user
+  validates_presence_of :user_min 
+  # validates_presence_of :user_max 
+  validates_presence_of :time_value
+  validates_presence_of :direction 
+  validates_presence_of :crypto_id
+  belongs_to :user
   @cumulative = 0
 
 # Using the expiration_timestamp, compared aainst the present to determine if the alert has expired
@@ -11,12 +16,13 @@ end
 
 # gets the current value of the alert by querying the name of cryptocurrency
 def get_value(id)
-  crypto = (HTTParty.get("https://api.coinmarketcap.com/v1/ticker/#{self.currency}/")).parsed_response
-  crypto[0][value]
+  crypto = (HTTParty.get("https://api.coinmarketcap.com/v1/ticker/#{self.crypto_id}/")).parsed_response
+  "$#{crypto[0]['price_usd']}"
 end
 
   def percent_changed
-    (((self.get_value('price_usd').to_d) - self.currency_value)/self.currency_value)* 100
+    convert_to_decimal = self.get_value(self).delete('$').to_d
+    ((convert_to_decimal - self.currency_value)/self.currency_value)* 100
   end
 
   #Checks interval set by user and sets an expiration interval
@@ -38,5 +44,9 @@ end
       :body => alert_message,
     )
   end
+end
 
+def get_value(id)
+  crypto = (HTTParty.get("https://api.coinmarketcap.com/v1/ticker/#{id}/")).parsed_response
+  "$#{crypto[0]['price_usd']}"
 end

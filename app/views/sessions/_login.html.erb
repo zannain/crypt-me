@@ -1,21 +1,17 @@
-<div class="col-md-6 offset-md-3">
-<%= form_for(:session, url: login_path) do |f| %>
-<%# render 'shared/error_messages' %>
-  <div class="row">
-    <%= f.label :email %>
-    <%= f.text_field :email, class: 'form-control' %>
-  </div>
-
-  <div class="row">
-    <%= f.label :password %>
-    <%= f.password_field :password, class: 'form-control' %>
-  </div>
+<div class="row">
+<div class="login col-md-6 offset-md-3">
+  <%= form_for(:session, url: login_path, remote: true) do |f| %>
+  <%# render 'shared/error_messages' %>
+  <%= f.label :email %>
+  <%= f.text_field :email, class: 'form-control', id: 'login_email' %>
+  <%= f.label :password %>
+  <%= f.password_field :password, class: 'form-control' %>
   <%= f.label :remember_me, class: "checkbox inline" do %>
-  	<%= f.check_box :remember_me %>
- 	 <span>Remember me on this computer</span>
-	<% end %>
-  
-<%= f.submit "Log In", class: 'btn btn-primary' %>
-<% end %>
-<p>New User? <%= link_to "Sign Up", signup_path %>
+    <%= f.check_box :remember_me %>
+    <span>Remember me on this computer</span>
+  <% end %>
+  <%= f.submit "Log In", class: 'ajax-submit btn btn-primary' %>
+  <% end %>
+  <p>New User? <%= link_to "Sign Up", signup_path, remote: true %>
+  </div>
 </div>

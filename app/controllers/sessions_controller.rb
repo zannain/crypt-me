@@ -5,7 +5,6 @@ class SessionsController < ApplicationController
   end
   # GET, creates a new session
   def new
-
   end
   # POST, receives session params
   def create
@@ -13,7 +12,8 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_to user
+      # redirect_to user
+      redirect_to root_path
     else
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new'

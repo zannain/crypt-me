@@ -1,5 +1,3 @@
-
-
 <div class="full_dashboard">
   <h1 class="dashboard">Welcome <%= "#{current_user.name}"%></h1>
   <div class="row">
@@ -11,9 +9,10 @@
         <tr>
           <th>Symbol</th>
           <th>Price (USD)</th>
-          <th>Starting Price</th>
+          <th>Starting Price</th>tml
           <th>Percent Change</th>
           <th>Alert Direction</th>
+          <th></th>
         </tr>
         <% @alerts.each do |alert| %>
           <tr>
@@ -22,9 +21,11 @@
             <td><%= "$#{alert.currency_value}" %></td>
             <td><%= number_to_percentage(alert.percent_changed) %></td>
             <td><%= alert.direction.capitalize %></td>
+            <td><%= link_to "Edit", edit_alert_path(alert), remote: true  %></td>
           </tr>
         <% end %>
       </table>
     </div>
   </div>
   </div>
+<%= render :partial => 'shared/modal' %>

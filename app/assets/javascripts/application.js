@@ -16,3 +16,14 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).on('turbolinks:load', function() {
+  console.log('document is ready!', new Date()); // this logging is optional
+  $('#login_email').focus();
+   $('.modal-footer .btn-primary').click(function() {
+    $('.modal-body form').submit();
+  }); 
+  $('.carousel').carousel({
+  	interval: 2000
+});
+});

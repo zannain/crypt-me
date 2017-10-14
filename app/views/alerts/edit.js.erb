@@ -1,2 +1,3 @@
 $('.modal-body').html("<%= j render 'form', url: edit_alert_path(params[:id]), :authenticity_token => true %>");
 $('.modal').modal();
+$( ".user-max" ).datepicker({ changeMonth: true, changeYear: true, dateFormat: "mm/dd/yy" });

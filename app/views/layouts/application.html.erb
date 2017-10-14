@@ -4,7 +4,6 @@
   <head>
     <title><%= yield(:title) %> | CryptMe</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
           <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
@@ -20,7 +19,6 @@
   <body>
     <div class="container">
     <%= render 'shared/nav' %>
-    <%= render 'layouts/carousel' %>
     <%= render 'shared/flash' %>
     <%= yield %>
     <%= debug(params) if Rails.env.development? %>

@@ -44,6 +44,7 @@ class AlertsController < ApplicationController
   end
   # update a alert
   def update
+    
     if @alert.update(alert_params)
       @alert.user=current_user
       redirect_to user_alerts_path(current_user), :notice => "Alert Updated!"

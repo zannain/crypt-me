@@ -7,7 +7,6 @@ class Alert < ApplicationRecord
   validates_presence_of :direction 
   validates_presence_of :crypto_id
   belongs_to :user
-  @cumulative = 0
 
 # Using the expiration_timestamp, compared aainst the present to determine if the alert has expired
 def expired?

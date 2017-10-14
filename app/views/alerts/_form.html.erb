@@ -25,14 +25,14 @@
 
         <div>
             <%= f.label :maximum %>
-            <%= f.text_field :user_max, class: "form-control", placeholder: "Max new"  %>
+            <%= f.text_field :user_max, 'data-behaviour' => 'datepicker', class: "form-control user-max", placeholder: "Max new"  %>
         </div>
 
         <div>
             <%= f.label :direction %>
             <%= f.select :direction, ['up', 'down'], class: "form-control" %>
         </div>
-
+            
         <div>
             <%= f.label  :time_interval %>
             <%= f.select :time_interval, ['hours', 'days', 'weeks'], class: "form-control" %>

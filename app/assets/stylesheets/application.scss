@@ -11,6 +11,7 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_jquery
+ *= require_bootstrap-datepicker3
  *= require_tree .
  *= require_self
 @import "font-awesome-sprockets";
@@ -44,3 +45,21 @@ $gray-medium-light: #eaeaea;
 .ajax-submit {
 	visibility:hidden;
 }
+
+        #showcase {
+            margin: 0 20px;
+            text-align: center;
+        }
+        #range {
+            height: 5px;
+            width: 100%;
+            positive:relative;
+        }
+        #value-span,
+        #value-input {
+            width: 50%;
+            float: left;
+            display: block;
+            text-align: center;
+            margin: 0;
+        }

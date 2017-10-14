@@ -9,6 +9,7 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
+//= require_bootstrap-datepicker
 //= require jquery3
 //= require jquery_ujs
 //= require popper
@@ -25,5 +26,6 @@ $(document).on('turbolinks:load', function() {
   }); 
   $('.carousel').carousel({
   	interval: 2000
+
 });
 });

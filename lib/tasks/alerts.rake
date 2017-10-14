@@ -6,7 +6,7 @@ namespace :alerts do
     @alerts = Alert.all
     @alerts.each do |alert|
       unless alert.expired?
-        present_value = alert.get_value('price_usd').to_d
+        present_value = alert.get_value(self).to_d
         new_percent_delta = alert.percent_changed
         if (alert.direction == "up" && new_percent_delta > alert.min_new) || (alert.direction == "down" && new_percent_delta < alert.min_new)
           alert.send_message("#{alert.currency} is currently #{alert.direction} by #{new_percent_delta}%")          

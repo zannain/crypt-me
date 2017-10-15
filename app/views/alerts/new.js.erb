@@ -1,2 +1,16 @@
-$('.modal-body').html("<%= j render 'form', url: user_alerts_path(current_user), :authenticity_token => true %>");
+$('.modal-body').html("<%= j render 'form', url: alerts_path, :authenticity_token => true %>");
+$( "#slider-range" ).slider({
+      range: true,
+      min: 0,
+      max: 100,
+      step: 5,
+      values: [ 25, 75 ],
+      slide: function( event, ui ) {
+        $( "#alert-min" ).val(ui.values[0] + "%");
+        $( "#alert-max" ).val(ui.values[1] + "%");
+      }
+    });
+    $( "#alert-min" ).val($("#slider-range").slider("values",0) + '%');
+    $("#alert-max").val($("#slider-range").slider("values",1) + '%');
+    $('#alert-datepicker').datepicker({dateFormat: "DD, d MM, yy"});
 $('.modal').modal();

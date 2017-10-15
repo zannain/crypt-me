@@ -1,22 +1,23 @@
 class UsersController < ApplicationController
-  before_action :set_user
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
+  before_action :correct_user,   only: [:edit, :update]
 
   def index
-    # @user = User.new
-  end
+    @user = User.find(params[:id])
+  end 
 
   def new
     @user = User.new
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
-      log_in @user
-      flash.now[:success] = "Welcome to Crypt Me"
-      redirect_to @user
+    user = User.find_by(email: params[:session][:email].downcase)
+    if user && user.authenticate(params[:session][:password])
+      log_in user
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      redirect_back_or user
     else
-      flash.now[:warning]
+      flash.now[:danger] = 'Invalid email/password combination'
       render 'new'
     end
   end
@@ -34,7 +35,6 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find(params[:id])
   end
 
   private
@@ -44,5 +44,10 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :phone_number, :password_confirmation)
+  end
+  # Confirms the correct user.
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless current_user?(@user)
   end
 end

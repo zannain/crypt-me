@@ -10,22 +10,28 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //= require_bootstrap-datepicker
-//= require jquery3
-//= require jquery_ujs
+
 //= require popper
-//= require bootstrap
 //= require rails-ujs
 //= require turbolinks
+//= require jquery3
+//= require jquery_ujs
+//= require bootstrap
+//= xxxrequire react
+//= xxxrequire react_ujs
+//= xxxrequire components
 //= require_tree .
 
+
 $(document).on('turbolinks:load', function() {
-  console.log('document is ready!', new Date()); // this logging is optional
+  console.log('document is ready!', new Date());
   $('#login_email').focus();
    $('.modal-footer .btn-primary').click(function() {
     $('.modal-body form').submit();
   }); 
   $('.carousel').carousel({
   	interval: 2000
+});
+});
 
-});
-});
+

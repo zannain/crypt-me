@@ -41,6 +41,8 @@ GEM
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     arel (8.0.0)
+    authy (2.7.1)
+      httpclient (>= 2.5.3.3)
     autoprefixer-rails (7.1.5)
       execjs
     babel-source (5.8.35)
@@ -117,6 +119,7 @@ GEM
     hirb (0.7.3)
     httparty (0.15.6)
       multi_xml (>= 0.5.2)
+    httpclient (2.8.3)
     i18n (0.8.6)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
@@ -268,6 +271,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  authy
   bcrypt (~> 3.1.7)
   bootstrap (~> 4.0.0.beta)
   byebug

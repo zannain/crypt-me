@@ -27,6 +27,7 @@ group :development, :test do
   gem 'faker', '~> 1.8'
   gem 'rspec-rails'
   gem 'selenium-webdriver'
+  gem 'authy'
 
 end
 

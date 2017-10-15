@@ -1,2 +1,45 @@
-$('.modal-body').html("<%= j render 'form', url: edit_alert_path(params[:id]), :authenticity_token => true %>");
+$('.modal-body').html("<%= j render 'form', alert: @alert %>");
+$( "#slider-range" ).slider({
+      range: true,
+      min: 0,
+      max: 100,
+      step: 5,
+      values: [ 25, 75 ],
+      slide: function( event, ui ) {
+        $( "#alert-min" ).val(ui.values[0] + "%");
+        $( "#alert-max" ).val(ui.values[1] + "%");
+      }
+    });
+
+    let $expandButton = $('.modal-btn');
+    let $currentValueField = $('#alert-value');
+    let url = 'https://api.coinmarketcap.com/v1/ticker/';
+    function currentValue() {
+      let currency = "<%= j @alert.crypto_id %>";
+      let urlToRequest = url + currency;
+      $.ajax({
+        url: urlToRequest,
+        type: 'GET',
+        dataType: 'json',
+        success(response) {
+          $("#alert-value").val('$' + parseFloat(response[0]['price_usd']).toFixed(2));
+        },error(jqXHR, status, errorThrown) {
+          console.log(jqXHR);
+        }
+      });
+    }
+
+    function update() {
+      $currentValueField.empty();
+      currentValue();
+      return false;
+    }
+
+
+    $("#alert-min" ).val($("#slider-range").slider("values",0) + '%');
+    $("#alert-max").val($("#slider-range").slider("values",1) + '%');
+    $("#alert-currency").val("<%= j @alert.crypto_id.capitalize %>");
+    $("#alert-value").val(update());
+    $('#alert-datepicker').datepicker({dateFormat: "DD, d MM, yy"});
 $('.modal').modal();
+    

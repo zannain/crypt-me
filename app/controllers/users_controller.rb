@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
-  before_action :set_user
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
+  before_action :correct_user,   only: [:edit, :update]
 
   def index
-    # @user = User.new
-  end
+    @user = User.find(params[:id])
+  end 
 
   def new
     @user = User.new
@@ -13,10 +14,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      flash.now[:success] = "Welcome to Crypt Me"
+      flash[:success] = "Welcome to CryptMe!"
       redirect_to @user
     else
-      flash.now[:warning]
       render 'new'
     end
   end
@@ -29,12 +29,11 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to @user
     else
-      render :edit, notice: 'Looks like you are missing a few details'
+      render :edit, flash[:info] = 'Looks like you are missing a few details'
     end
   end
   
   def show
-    @user = User.find(params[:id])
   end
 
   private
@@ -45,4 +44,10 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :phone_number, :password_confirmation)
   end
+  # Confirms the correct user.
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless current_user?(@user)
+  end
+
 end

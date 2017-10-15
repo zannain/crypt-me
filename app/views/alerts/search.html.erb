@@ -40,7 +40,7 @@
             <td><%= result['percent_change_24h'] %></td>
             <!--    Row:  Percent Change in 7 Days  -->
             <td><%= result['percent_change_7d'] %></td>
-            <td><%= link_to "Alert Me", "#{new_user_alert_path(current_user)}?crypto_id=#{result["id"]}&currency=#{result['name']}&currency_value=#{result['price_usd']}", remote: true %></td>
+            <td><%= link_to "Alert Me", "#{new_alert_path}?crypto_id=#{result["id"]}&currency=#{result['name']}&currency_value=#{result['price_usd']}", remote: true %></td>
         </tr>
       <% end %>
     </tbody>

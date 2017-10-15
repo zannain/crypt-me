@@ -1,0 +1,10 @@
+<h1 id="alert- <%= alert.id %>"></h1>
+  <span class="user"><%= link_to alert.user.name, alert.user %></span>
+  <ol>
+	<li><%= alert.currency %></li>
+	<li><%# alert.get_value(self)%></li>
+	<li><%= alert.currency_value %></li>
+	<li><%# number_to_percentage(alert.percent_changed) %></li>
+	<li><%# alert.direction.capitalize! %></li>
+	<li><%= link_to "Edit", edit_alert_path , remote: true %></li>
+</ol>

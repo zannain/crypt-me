@@ -1,10 +1,9 @@
 require 'bigdecimal/util'
 class AlertsController < ApplicationController
-
-  before_action :all_alerts, only: [:index,:dashboard]
+  before_action :all_alerts, only: [:index]
   before_action :set_alert, only: [:show, :edit, :update, :destroy]
   before_action :new_alert, only: [:new]
-
+  before_action :logged_in_user
 
   # search for a cryptocurrency
   def search
@@ -14,15 +13,13 @@ class AlertsController < ApplicationController
 
   # list current_user alerts
   def index
-    @alerts = Alert.all
   end
 
   # receives params for a new alert
   def create
-    @alert = Alert.new(alert_params)
-    @alert.user = current_user
+    @alert = current_user.alerts.build(alert_params)
     if @alert.save!
-      redirect_to search_path, notice: 'Alert was successfully created.'
+      redirect_to alerts_path, notice: 'Alert was successfully created.'
     else
       render :new
     end
@@ -37,16 +34,14 @@ class AlertsController < ApplicationController
   end
 
   def edit
-    @alert.user = current_user
   end
 
   def show
   end
   # update a alert
   def update
-    if @alert.update(alert_params)
-      @alert.user=current_user
-      redirect_to user_alerts_path(current_user), :notice => "Alert Updated!"
+    if @alert.update_attributes(alert_params)
+      redirect_to alerts_path, :notice => "Alert Updated!"
     else
       render 'edit'
     end
@@ -58,13 +53,9 @@ class AlertsController < ApplicationController
   end
 
   private
-
-  def set_user
-     user = current_user
-  end
   # # find a specific alert by params
   def set_alert
-  @alert = Alert.find(params[:id])
+    @alert = Alert.find(params[:id])
   end
 
   # create a new alert based on params
@@ -84,11 +75,14 @@ class AlertsController < ApplicationController
       :created_at,
       :currency,
       :currency_value,
-      :user_min,
-      :user_max,
-      :time_value,
-      :time_interval,
+      :alert_min,
+      :alert_max,
+      :alert_expiration,
     :direction)
   end
 
+  def correct_user
+    @alert = current_user.alerts.find_by(id: params[:id])
+    redirect_to root_url if @alert.nil?
+  end
 end

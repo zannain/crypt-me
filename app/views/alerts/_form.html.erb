@@ -1,48 +1,46 @@
-<%= form_with(model: @alert, url: user_alerts_path(current_user), :authenticity_token => true, remote: true) do |f| %>
+<%= form_with(model: @alert, :authenticity_token => true, remote: true) do |f| %>
     
-        <div>
-            <%= f.label :time %> 
-            <%= f.text_field :created_at, class: "form-control", value: "#{DateTime.now.strftime('%I:%M')}"  %>
-        </div>
+    <div>
+        <%= f.label :time %> 
+        <%= f.text_field :created_at, class: "form-control", value: "#{DateTime.now.strftime('%I:%M')}"  %>
+    </div>
 
-        <div>
-            <%= f.label :currency %>
-            <%= f.text_field :currency, class: "form-control", value: "#{@currency}" %>
-        </div>
+    <div>
+        <%= f.label :currency %>
+        <%= f.text_field :currency, class: "form-control", value: "#{@currency}", id: "alert-currency" %>
+        <%= f.hidden_field :crypto_id,  value: "#{@crypto_id}" %>
+    </div>
 
+    <div>
+        <%= f.label :currency_value %>
+        <%= f.text_field :currency_value, class: "form-control", value: "#{@currency_value}", id: "alert-value"  %>
+    </div>
 
-        <div>
-            <%= f.label :current_value %>
-            <%= f.text_field :currency_value, class: "form-control", value: "#{@currency_value}"  %>
-            <%= f.hidden_field :crypto_id,  value: "#{@crypto_id}" %>
-        </div>
+    <div id="slider-input">
+        <%= f.label :alert_min %>
+        <%= f.text_field :alert_min, class: "form-control", id: "alert-min"%>
 
+        <%= f.label :alert_max %>
+        <%= f.text_field :alert_max, class: 'form-control', id: "alert-max" %>
+        <br>
+        <p id="slider-range"></p>
+    </div>
 
-        <div>
-            <%= f.label :minimum %>
-            <%= f.text_field :user_min, class: "form-control", placeholder: "Min new" %>
-        </div>
+    <div>
+        <%= f.label :direction %>
+        <%= f.select :direction, ['up', 'down'], class: "form-control" %>
+    </div>
+            
+    <div>
+        <%= f.label  :time_interval %>
+        <%= f.select :time_interval, ['hours', 'days', 'weeks'], class: "form-control" %>
+    </div>        
+    <div>
+        <%= f.label  :alert_expiration, 'Alert Expiration' %>
+        <%= f.text_field :alert_expiration , class: "form-control", id: 'alert-datepicker', placeholder: "Time Value" %>
+    </div>
 
-        <div>
-            <%= f.label :maximum %>
-            <%= f.text_field :user_max, class: "form-control", placeholder: "Max new"  %>
-        </div>
-
-        <div>
-            <%= f.label :direction %>
-            <%= f.select :direction, ['up', 'down'], class: "form-control" %>
-        </div>
-
-        <div>
-            <%= f.label  :time_interval %>
-            <%= f.select :time_interval, ['hours', 'days', 'weeks'], class: "form-control" %>
-        </div>
-
-        <div>
-            <%= f.label  :time_value %>
-            <%= f.text_field :time_value , class: "form-control", placeholder: "Time Value" %>
-        </div>
-        <div>
-        <%= f.submit "Create Alert" %>
-        </div>
+    <div>        
+    <%= f.submit "Create Alert", class: 'ajax-submit' %>
+    </div>
     <% end %>

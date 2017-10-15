@@ -22,3 +22,5 @@
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+# Ignore encrypted secrets key file.
+config/secrets.yml.key

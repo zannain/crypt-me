@@ -1,0 +1,16 @@
+$('.modal-body').html("<%= j render 'form', url: new_alert_path %>");
+$( "#slider-range" ).slider({
+      range: true,
+      min: 0,
+      max: 100,
+      step: 5,
+      values: [ 25, 75 ],
+      slide: function( event, ui ) {
+        $( "#alert-min" ).val(ui.values[0] + "%");
+        $( "#alert-max" ).val(ui.values[1] + "%");
+      }
+    });
+    $( "#alert-min" ).val($("#slider-range").slider("values",0) + '%');
+    $("#alert-max").val($("#slider-range").slider("values",1) + '%');
+    $('#alert-datepicker').datepicker({dateFormat: "DD, d MM, yy"});
+$('.modal').modal();

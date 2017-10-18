@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'search', to: 'alerts#search'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
+  delete '/xalert', to: 'alerts#destroy'
   delete '/logout', to: 'sessions#destroy'
   resources 'alerts'
   resources 'users'

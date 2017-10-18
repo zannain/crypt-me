@@ -12,7 +12,7 @@
           <th>Starting Price</th>
           <th>Percent Change</th>
           <th>Alert Direction</th>
-          <th></th>
+          <th colspan="2"></th>
         </tr>
         <% @alerts.each do |alert| %>
           <tr>
@@ -21,7 +21,9 @@
             <td><%= "$#{alert.alert_value}" %></td>
             <td><%= number_to_percentage(alert.percent_changed) %></td>
             <td><%= alert.direction.capitalize %></td>
-            <td><%= link_to "Edit", edit_alert_path(alert), remote: true  %>
+            <td><%= link_to "Edit", edit_alert_path(alert), class:"btn btn-info", remote: true  %>
+            <%= link_to "Delete", alert, class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }  %>
+
             </td>
         <% end %>
           </tr>

@@ -1,7 +1,6 @@
 require 'bigdecimal/util'
 class AlertsController < ApplicationController
-  before_action :correct_user, only: [:destroy]
-  before_action :set_alert, only: [ :edit, :update]
+  before_action :set_alert, only: [ :edit, :update, :destroy]
   before_action :new_alert, only: [:search, :new]
 
 
@@ -22,7 +21,7 @@ class AlertsController < ApplicationController
   def create
     @alert = current_user.alerts.build(alert_params)
     if @alert.save!
-      redirect_to search_path, notice: 'Alert was successfully created.'
+      redirect_to search_path, flash[:success] = 'Alert was successfully created.'
     else
       render :new
     end
@@ -43,21 +42,21 @@ class AlertsController < ApplicationController
   # update a alert
   def update
     if @alert.update_attributes(alert_params)
-      redirect_to alerts_path, :notice => "Alert Updated!"
+      redirect_to alerts_path, flash[:success] = "Alert Updated!"
     else
-      debugger
       render 'edit'
     end
   end
   # delete an alert based on params
   def destroy
-    @alert.destroy(alert_params)
-    redirect_to alerts_url, :notice => "Alert Deleted!"
+    @alert.destroy
+    redirect_to alerts_url, flash[:success] = "Alert Deleted!"
   end
 
   private
   # find a specific alert by params
   def set_alert
+    @user = current_user
     @alert = Alert.find(params[:id])
   end
 
@@ -77,10 +76,5 @@ class AlertsController < ApplicationController
       :alert_max,
       :alert_expiration,
     :direction, :alert_interval)
-  end
-
-  def correct_user
-    @alerts = current_user.alerts
-    redirect_to root_url if @alert.nil?
   end
 end

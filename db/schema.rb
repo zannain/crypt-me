@@ -18,11 +18,11 @@ ActiveRecord::Schema.define(version: 20171016121816) do
   create_table "alerts", force: :cascade do |t|
     t.string "alert_currency"
     t.decimal "alert_value"
-    t.datetime "alert_expiration"
-    t.string "alert_id"
     t.integer "alert_min"
     t.integer "alert_max"
+    t.datetime "alert_expiration"
     t.string "direction"
+    t.string "alert_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

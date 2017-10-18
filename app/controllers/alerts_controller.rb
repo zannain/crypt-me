@@ -74,8 +74,8 @@ class AlertsController < ApplicationController
     params.require(:alert).permit(
       :alert_id,
       :created_at,
-      :currency,
-      :currency_value,
+      :alert_currency,
+      :alert_value,
       :alert_min,
       :alert_max,
       :alert_expiration,

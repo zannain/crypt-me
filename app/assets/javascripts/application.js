@@ -20,7 +20,7 @@
 
 $(document).on('turbolinks:load', function() {
   // console.log('document is ready!', new Date());
-  $("#navbarNavDropdown").dropdown();
+
   $('#login_email').focus();
    $('.modal-footer .btn-primary').click(function() {
     $('.modal-body form').submit();
@@ -28,4 +28,6 @@ $(document).on('turbolinks:load', function() {
   $('.carousel').carousel({
   	interval: 2000
 });
+$(".dropdown-toggle").dropdown();
 });
+

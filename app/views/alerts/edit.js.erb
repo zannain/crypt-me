@@ -3,7 +3,7 @@ $( "#slider-range" ).slider({
       range: true,
       min: 0,
       max: 100,
-      // step: 5,
+      step: 5,
       values: [ 25, 75 ],
       slide: function( event, ui ) {
         $( "#alert-min" ).val(ui.values[0] + "%");
@@ -14,7 +14,7 @@ $( "#slider-range" ).slider({
     let $currentValueField = $('#alert-value');
     let url = 'https://api.coinmarketcap.com/v1/ticker/';
     function currentValue() {
-      let currency = "<%= j @alert.crypto_id %>";
+      let currency = "<%= j @alert.alert_id %>";
       let urlToRequest = url + currency;
       $.ajax({
         url: urlToRequest,
@@ -37,8 +37,8 @@ $( "#slider-range" ).slider({
 
     $("#alert-min" ).val($("#slider-range").slider("values",0) + '%');
     $("#alert-max").val($("#slider-range").slider("values",1) + '%');
-    $("#alert-currency").val("<%= j @alert.crypto_id.capitalize %>");
+    $("#alert-currency").val("<%= j @alert.alert_id.capitalize %>");
     $("#alert-value").val(update());
     $('#alert-datepicker').datepicker({dateFormat: "DD, d MM, yy"});
-$('.modal').modal('hide');
+$('.modal').modal();
     

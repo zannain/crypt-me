@@ -41,6 +41,7 @@ class AlertsController < ApplicationController
   end
   # update a alert
   def update
+    debugger
     if @alert.update_attributes(alert_params)
       redirect_to alerts_path, :notice => "Alert Updated!"
     else

@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <%= link_to "Crypto Me", root_path, class:'navbar-brand' %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <%# link_to "About", about_path, class:'nav-link' %>
+      </li>
+      <% if logged_in? %>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dashboard</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <%= link_to "My Alerts", alerts_path, class:"dropdown-item" %>
+          <%= link_to "Currency", search_path, class:"dropdown-item" %>
+          <%= link_to "Settings", edit_user_path(current_user), class:"dropdown-item", remote: true%>
+        </div>
+      </li>
+      <%= link_to "Logout", logout_path,  method: :delete , class:'nav-link' %>
+      <% else %>
+      <li class="nav-item">
+        <%= link_to "Login", login_path, class:'nav-link', remote: true%>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Sign Up", signup_path, class:'nav-link', remote: true %>
+      </li>
+    </ul>
+    <% end %>
+  </div>
+</nav>
+

@@ -1,0 +1,51 @@
+<%= form_for(@alert, remote: true) do |f| %>
+    <div class="row">
+        <div class="col alert-time form-group">
+            <%= f.label :time %> 
+            <%= f.text_field :created_at, class: "form-control", value: "#{DateTime.now.strftime('%I:%M %p')}"  %>
+        </div>
+        <div class="col alert-currency form-group">
+            <%= f.label :currency %>
+            <%= f.text_field :currency, class: "form-control", value: "#{@currency}", id: "alert-currency" %>
+        </div>
+    </div>
+
+    <div class="alert-value form-group">
+        <%= f.label :currency_value %>
+        <%= f.text_field :currency_value, class: "form-control", value: "#{@currency_value}", id: "alert-value"  %>
+    </div>
+    
+    <div id="slider-input" class="alert-range row">
+        <div class="col form-group">
+            <%= f.label :alert_min %>
+            <%= f.text_field :alert_min, class: "form-control", id: "alert-min"%>
+        </div>
+        <div class="col form-group">
+            <%= f.label :alert_max %>
+            <%= f.text_field :alert_max, class: 'form-control', id: "alert-max" %>
+        </div>
+        <div id="slider-range"></div>
+    </div>
+
+    <div class="alert-interval-direction row">
+        <div class="col alert-direction form-group">
+            <%= f.label :direction %>
+            <%= f.select :direction, ['up', 'down'], class: "form-control" %>
+        </div>
+            
+        <div class="col alert-time_interval form-group">
+            <%= f.label  :time_interval %>
+            <%= f.select :time_interval, ['hours', 'days', 'weeks'], class: "form-control" %>
+        </div>       
+    </div> 
+
+    <div class="alert-expiration form-group">
+        <%= f.label  :alert_expiration, 'Alert Expiration' %>
+        <%= f.text_field :alert_expiration , class: "form-control", id: 'alert-datepicker', placeholder: "Time Value" %>
+    </div>
+
+    <div>        
+        <%= f.hidden_field :crypto_id,  value: "#{@crypto_id}" %>
+        <%= f.submit "Create Alert", class: 'ajax-submit' %>
+    </div>
+<% end %>

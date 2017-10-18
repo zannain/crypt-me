@@ -1,5 +1,5 @@
-$('.modal-body').html("<%= j render 'form', url: edit_alert_path(@alert) %>");
-$('.modal-title').html("Edit "<%= j @alert.alert_currency %>" Alert");
+$('.modal-body').html("<%= j render 'form' %>");
+$('.modal-title').html('Edit "<%= j @alert.alert_currency %>" Alert');
 
 $( "#slider-range" ).slider({
       range: true,
@@ -37,7 +37,7 @@ $( "#slider-range" ).slider({
       return false;
     }
 
-
+    $("#alert-id").val("<%= j @alert.alert_id %>");
     $("#alert-min" ).val($("#slider-range").slider("values",0) + '%');
     $("#alert-max").val($("#slider-range").slider("values",1) + '%');
     $("#alert-currency").val("<%= j @alert.alert_currency %>");

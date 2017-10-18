@@ -35,9 +35,9 @@
         </div>
             
         <div class="col alert-time_interval form-group">
-            <%= f.label  :alert_interval %>
+            <%= f.label  :alert_min, "Min" %>
             <%= f.select :alert_interval, ['hours', 'days', 'weeks'], class: "form-control" %>
-            <%= f.label  :alert_interval %>
+            <%= f.label  :alert_max, "Max" %>
             <%= f.select :alert_interval, ['hours', 'days', 'weeks'], class: "form-control" %>
         </div>       
     </div> 

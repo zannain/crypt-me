@@ -29,5 +29,6 @@ $(document).on('turbolinks:load', function() {
   	interval: 2000
 });
 $(".dropdown-toggle").dropdown();
+
 });
 

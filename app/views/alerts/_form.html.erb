@@ -18,14 +18,16 @@
     <div id="slider-input" class="alert-range row">
         <div class="col form-group">
             <%= f.label :alert_min %>
-            <%= f.text_field :alert_min, class: "form-control", id: "alert-min"%>
+            <%= f.text_field :alert_min, class: "form-control", id: "alert-min" %>
         </div>
         <div class="col form-group">
             <%= f.label :alert_max %>
             <%= f.text_field :alert_max, class: 'form-control', id: "alert-max" %>
         </div>
-        <div id="slider-range"></div>
+        <br>
     </div>
+    <div id="slider-range"></div>
+    <br>
 
     <div class="alert-interval-direction row">
         <div class="col alert-direction form-group">
@@ -34,8 +36,8 @@
         </div>
             
         <div class="col alert-time_interval form-group">
-            <%= f.label  :time_interval %>
-            <%= f.select :time_interval, ['hours', 'days', 'weeks'], class: "form-control" %>
+            <%= f.label  :alert_interval %>
+            <%= f.select :alert_interval, ['hours', 'days', 'weeks'], class: "form-control" %>
         </div>       
     </div> 
 

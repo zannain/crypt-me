@@ -20,7 +20,7 @@
 
 $(document).on('turbolinks:load', function() {
   // console.log('document is ready!', new Date());
-  $(".dropdown-toggle").dropdown();
+  $("#navbarNavDropdown").dropdown();
   $('#login_email').focus();
    $('.modal-footer .btn-primary').click(function() {
     $('.modal-body form').submit();

@@ -9,12 +9,12 @@
         <tr>
           <th>Symbol</th>
           <th>Price (USD)</th>
-          <th>Starting Price</th>tml
+          <th>Starting Price</th>
           <th>Percent Change</th>
           <th>Alert Direction</th>
           <th></th>
         </tr>
-        <%= @alerts.each do |alert| %>
+        <% @alerts.each do |alert| %>
           <tr>
             <td><%= alert.alert_currency%></td>
             <td><%= alert.get_value(self)%></td>
@@ -22,13 +22,13 @@
             <td><%= number_to_percentage(alert.percent_changed) %></td>
             <td><%= alert.direction.capitalize %></td>
             <td><%= link_to "Edit", edit_alert_path(alert), remote: true  %>
-              
             </td>
-          </tr>
         <% end %>
+          </tr>
       </table>
     </div>
   </div>
   </div>
+
 <%= render :partial => 'shared/modal' %>
 

@@ -1,7 +1,13 @@
 require 'bigdecimal/util'
 class Alert < ApplicationRecord
   belongs_to :user
-  validates :user_id, presence: true
+  validates_presence_of :user_id
+  validates_presence_of :alert_currency
+  validates_presence_of :alert_min
+  validates_presence_of :alert_max
+  validates_presence_of :alert_id
+  validates_presence_of :alert_interval
+  validates_presence_of :alert_expiration
   
 # Using the expiration_timestamp, compared aainst the present to determine if the alert has expired
 def expired?

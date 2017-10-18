@@ -1,4 +1,6 @@
-$('.modal-body').html("<%= j render 'form', alert: @alert %>");
+$('.modal-body').html("<%= j render 'form', url: edit_alert_path(@alert) %>");
+$('.modal-title').html("Edit "<%= j @alert.alert_currency %>" Alert");
+
 $( "#slider-range" ).slider({
       range: true,
       min: 0,
@@ -11,9 +13,9 @@ $( "#slider-range" ).slider({
       }
     });
 
-    let $currentValueField = $('#alert-value');
-    let url = 'https://api.coinmarketcap.com/v1/ticker/';
-    function currentValue() {
+    var $currentValueField = $('#alert-value');
+    var url = 'https://api.coinmarketcap.com/v1/ticker/';
+    function currentValue(name) {
       let currency = "<%= j @alert.alert_id %>";
       let urlToRequest = url + currency + "/";
       $.ajax({
@@ -21,24 +23,26 @@ $( "#slider-range" ).slider({
         type: 'GET',
         dataType: 'json',
         success(response) {
-          $("#alert-value").val('$' + parseFloat(response[0]['price_usd']).toFixed(2));
-        },error(jqXHR, status, errorThrown) {
+          $("#alert-value").val('$' + parseFloat(response[0][name]).toFixed(2));
+        }
+          ,error(jqXHR, status, errorThrown) {
           console.log(jqXHR);
         }
       });
     }
 
-    function update() {
+    function update(name) {
       $currentValueField.empty();
-      currentValue();
+      currentValue(name);
       return false;
     }
 
 
     $("#alert-min" ).val($("#slider-range").slider("values",0) + '%');
     $("#alert-max").val($("#slider-range").slider("values",1) + '%');
-    $("#alert-currency").val("<%= j @alert.alert_id.capitalize %>");
-    $("#alert-value").val(update());
-    $('#alert-datepicker').datepicker({dateFormat: "DD, d MM, yy"});
+    $("#alert-currency").val("<%= j @alert.alert_currency %>");
+    $("#alert-value").val(update("price_usd"));
+    $('#alert-datepicker').val("<%= @alert.alert_expiration.strftime("%A, %B %e %Y") %>")
+    $('#alert-datepicker').datepicker({dateFormat: "DD, MM d, yy"});
 $('.modal').modal();
     

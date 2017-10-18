@@ -1,54 +1,56 @@
+<div class="container">
 <%= form_for(@alert, remote: true) do |f| %>
-    <div class="row">
+    <div class="row alert-time-currency">
         <div class="col alert-time form-group">
-            <%= f.label :time %> 
+            <%= f.label :time, class: "col-form-label" %> 
             <%= f.text_field :created_at, class: "form-control", value: "#{DateTime.now.strftime('%I:%M %p')}"  %>
         </div>
         <div class="col alert-currency form-group">
-            <%= f.label :currency %>
+            <%= f.label :currency, class: "col-form-label" %>
             <%= f.text_field :alert_currency, class: "form-control", value: "#{@currency}", id: "alert-currency" %>
         </div>
     </div>
 
     <div class="alert-value form-group">
-        <%= f.label :currency_value %>
+        <%= f.label :currency_value, class: "col-form-label" %>
         <%= f.text_field :alert_value, class: "form-control", value: "#{@currency_value}", id: "alert-value"  %>
     </div>
     
-    <div id="slider-input" class="alert-range row">
+    <div class="alert-range row" id="slider-input">
         <div class="col form-group">
-            <%= f.label :alert_min %>
+            <%= f.label :alert_min, class: "col-form-label" %>
             <%= f.text_field :alert_min, class: "form-control", id: "alert-min"%>
         </div>
         <div class="col form-group">
-            <%= f.label :alert_max %>
+            <%= f.label :alert_max, class: "col-form-label"%>
             <%= f.text_field :alert_max, class: 'form-control', id: "alert-max" %>
         </div>
         <br>
     </div>
-    <div id="slider-range"></div>
 
-    <div class="alert-interval-direction row">
+    <div id="slider-range" class="form-group"></div>
+            
+    <div class="row alert-direction-range">
         <div class="col alert-direction form-group">
-            <%= f.label :direction %>
+            <%= f.label :direction, class: "col-form-label" %>
             <%= f.select :direction, ['up', 'down'], class: "form-control" %>
         </div>
-            
-        <div class="col alert-time_interval form-group">
-            <%= f.label  :alert_min, "Min" %>
+        <div class="col alert-range form-group">
+            <%= f.label  :alert_min, "Min", class: "col-form-label" %>
             <%= f.select :alert_interval, ['hours', 'days', 'weeks'], class: "form-control" %>
-            <%= f.label  :alert_max, "Max" %>
+        </div>
+        <div class="col alert-range form-group">
+            <%= f.label  :alert_max, "Max", class: "col-form-label" %>
             <%= f.select :alert_interval, ['hours', 'days', 'weeks'], class: "form-control" %>
         </div>       
     </div> 
 
     <div class="alert-expiration form-group">
-        <%= f.label  :alert_expiration, 'Alert Expiration' %>
+        <%= f.label  :alert_expiration, class: "col-form-label" %>
         <%= f.text_field :alert_expiration , class: "form-control", id: 'alert-datepicker', placeholder: "Time Value" %>
     </div>
-
-    <div>        
-        <%= f.hidden_field :alert_id,  value: "#{@crypto_id}" %>
+        <%= f.hidden_field :alert_id,  value: @crypto_id %>
         <%= f.submit "Create Alert", class: 'ajax-submit' %>
-    </div>
+
 <% end %>
+</div>

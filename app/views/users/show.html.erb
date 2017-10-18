@@ -1,0 +1,7 @@
+    <% if @user.alerts.any? %>
+      <h3>Microposts (<%= @user.alerts.count %>)</h3>
+      <ol class="microposts">
+        <%= render @alerts %>
+      </ol>
+    <% end %>
+  </div>

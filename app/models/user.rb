@@ -7,7 +7,7 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   has_many :alerts, dependent: :destroy
 
   # Returns the hash digest of the given string.
@@ -34,6 +34,9 @@ class User < ApplicationRecord
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
 
+  def feed
+    Micropost.where("user_id = ?", id)
+  end
   # Forgets a user.
   def forget
     update_attribute(:remember_digest, nil)

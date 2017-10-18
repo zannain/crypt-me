@@ -1,9 +1,9 @@
 require 'bigdecimal/util'
 class AlertsController < ApplicationController
-  before_action :all_alerts, only: [:index]
-  before_action :set_alert, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:destroy]
+  before_action :set_alert, only: [ :edit, :update]
   before_action :new_alert, only: [:search, :new]
-  before_action :logged_in_user
+
 
   # search for a cryptocurrency
   def search
@@ -15,6 +15,7 @@ class AlertsController < ApplicationController
 
   # list current_user alerts
   def index
+    @alerts  = current_user.alerts
   end
 
   # receives params for a new alert
@@ -41,7 +42,6 @@ class AlertsController < ApplicationController
   end
   # update a alert
   def update
-    debugger
     if @alert.update_attributes(alert_params)
       redirect_to alerts_path, :notice => "Alert Updated!"
     else
@@ -55,7 +55,7 @@ class AlertsController < ApplicationController
   end
 
   private
-  # # find a specific alert by params
+  # find a specific alert by params
   def set_alert
     @alert = Alert.find(params[:id])
   end
@@ -63,11 +63,6 @@ class AlertsController < ApplicationController
   # create a new alert based on params
   def new_alert
     @alert = Alert.new(params[:id])
-  end
-
-  # get all alerts
-  def all_alerts
-    @alerts = Alert.all
   end
 
   # alert parameters
@@ -84,7 +79,7 @@ class AlertsController < ApplicationController
   end
 
   def correct_user
-    @alert = current_user.alerts.find_by(id: params[:id])
+    @alerts = current_user.alerts
     redirect_to root_url if @alert.nil?
   end
 end

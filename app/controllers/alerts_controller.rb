@@ -11,7 +11,6 @@ class AlertsController < ApplicationController
     @currency = params[:currency]
     @currency_value = params[:currency_value]
     @crypto_id = params[:crypto_id]
-    
   end
 
   # list current_user alerts

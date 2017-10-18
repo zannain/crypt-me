@@ -19,12 +19,12 @@ gem 'nokogiri'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'bootstrap', '~> 4.0.0.beta'
+
 group :production do
   gem 'rails_12factor'
   gem 'jquery-rails'
   gem 'jquery-ui-rails'
 end
-
 
 
 group :development, :test do

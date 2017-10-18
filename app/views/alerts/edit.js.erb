@@ -15,7 +15,7 @@ $( "#slider-range" ).slider({
     let url = 'https://api.coinmarketcap.com/v1/ticker/';
     function currentValue() {
       let currency = "<%= j @alert.alert_id %>";
-      let urlToRequest = url + currency;
+      let urlToRequest = url + currency + "/";
       $.ajax({
         url: urlToRequest,
         type: 'GET',

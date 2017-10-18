@@ -19,7 +19,8 @@
 //= require_tree .
 
 $(document).on('turbolinks:load', function() {
-  console.log('document is ready!', new Date());
+  // console.log('document is ready!', new Date());
+  $(".dropdown-toggle").dropdown();
   $('#login_email').focus();
    $('.modal-footer .btn-primary').click(function() {
     $('.modal-body form').submit();

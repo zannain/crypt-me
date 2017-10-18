@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
-  before_action :correct_user,   only: [:indec, :edit, :update]
+  before_action :correct_user,   only: [:index, :edit, :update]
 
   def index
   end 
 
   def new
-    @user = User.new
+    @user = User.new()
   end
 
   def create

@@ -10,13 +10,13 @@ end
 
 # gets the current value of the alert by querying the name of cryptocurrency
 def get_value(id)
-  crypto = (HTTParty.get("https://api.coinmarketcap.com/v1/ticker/#{self.crypto_id}/")).parsed_response
+  crypto = (HTTParty.get("https://api.coinmarketcap.com/v1/ticker/#{self.alert_id}/")).parsed_response
   "#{crypto[0]['price_usd']}"
 end
 
   def percent_changed
     convert_to_decimal = self.get_value(self).to_d
-    ((convert_to_decimal - self.currency_value)/self.currency_value)* 100
+    ((convert_to_decimal - self.alert_value)/self.alert_value)* 100
   end
 
   #Checks interval set by user and sets an expiration interval

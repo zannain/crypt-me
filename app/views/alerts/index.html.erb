@@ -16,9 +16,9 @@
         </tr>
         <%= @alerts.each do |alert| %>
           <tr>
-            <td><%= alert.currency%></td>
+            <td><%= alert.alert_currency%></td>
             <td><%= alert.get_value(self)%></td>
-            <td><%= "$#{alert.currency_value}" %></td>
+            <td><%= "$#{alert.alert_value}" %></td>
             <td><%= number_to_percentage(alert.percent_changed) %></td>
             <td><%= alert.direction.capitalize %></td>
             <td><%= link_to "Edit", edit_alert_path(alert), remote: true  %>

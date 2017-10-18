@@ -19,6 +19,7 @@ gem 'nokogiri'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'bootstrap', '~> 4.0.0.beta'
+gem 'twilio-ruby', '~> 5.4.0'
 
 group :production do
   gem 'rails_12factor'

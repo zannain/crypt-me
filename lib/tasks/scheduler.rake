@@ -1,6 +1,5 @@
 require 'bigdecimal/util'
 
-namespace :alert do
   desc "User can receive alert based on a range"
   task :send_alert do
     @alerts = Alert.all
@@ -15,4 +14,3 @@ namespace :alert do
       end
     end
   end
-end

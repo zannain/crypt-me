@@ -1,4 +1,5 @@
 require 'bigdecimal/util'
+
 class AlertsController < ApplicationController
   before_action :set_alert, only: [ :edit, :update, :destroy]
   before_action :new_alert, only: [:search, :new]

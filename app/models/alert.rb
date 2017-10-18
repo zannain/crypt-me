@@ -1,4 +1,6 @@
 require 'bigdecimal/util'
+require 'twilio-ruby'
+
 class Alert < ApplicationRecord
   belongs_to :user
   validates_presence_of :user_id
@@ -23,15 +25,6 @@ end
   def percent_changed
     convert_to_decimal = self.get_value(self).to_d
     ((convert_to_decimal - self.alert_value)/self.alert_value)* 100
-  end
-
-  #Checks interval set by user and sets an expiration interval
-  def expiration_timestamp
-    case time_interval
-      when "hours" then self.created_at # + time_value.hours
-      when 'days' then  Time.now # + time_value.days
-      when 'weeks' then  Time.now # + time_value.weeks
-    end
   end
 
   def send_message(alert_message)

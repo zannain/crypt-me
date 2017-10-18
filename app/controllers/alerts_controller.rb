@@ -72,7 +72,7 @@ class AlertsController < ApplicationController
   # alert parameters
   def alert_params
     params.require(:alert).permit(
-      :crypto_id,
+      :alert_id,
       :created_at,
       :currency,
       :currency_value,

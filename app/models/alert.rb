@@ -1,6 +1,5 @@
 require 'bigdecimal/util'
 require 'twilio-ruby'
-require 'dotenv'
 class Alert < ApplicationRecord
   belongs_to :user
   validates_presence_of :user_id

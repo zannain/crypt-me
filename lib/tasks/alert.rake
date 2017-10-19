@@ -1,6 +1,5 @@
 require 'bigdecimal/util'
 require 'twilio-ruby'
-require 'dotenv/tasks'
 namespace :alert do
   desc "User can receive alert based on a range"
   task :send_alert => :environment do

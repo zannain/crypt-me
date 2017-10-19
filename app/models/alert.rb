@@ -28,8 +28,8 @@ class Alert < ApplicationRecord
   end
 
   def send_message(alert_message, user)
-    @twilio_number = ENV['twilio_number']
-    @client = Twilio::REST::Client.new ENV['twilio_sid'], ENV['twilio_token']
+    @twilio_number = ENV['TWILIO_NUMBER']
+    @client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
 
     @client.api.account.messages.create(
       :from => @twilio_number,

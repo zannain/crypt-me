@@ -1,5 +1,6 @@
 require 'bigdecimal/util'
 require 'twilio-ruby'
+require 'dotenv'
 class Alert < ApplicationRecord
   belongs_to :user
   validates_presence_of :user_id
@@ -27,13 +28,13 @@ class Alert < ApplicationRecord
     ((convert_to_decimal - self.alert_value)/self.alert_value)* 100
   end
 
-  def send_message(alert_message, user)
-    @twilio_number = ENV['TWILIO_NUMBER']
-    @client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
+  def send_message(alert_message, number)
+    @twilio_number = ENV["TWILIO_NUMBER"]
+    @client = Twilio::REST::Client.new ENV["TWILIO_SID"],ENV["TWILIO_TOKEN"]
 
     @client.api.account.messages.create(
       :from => @twilio_number,
-      :to => user.phone_number,
+      :to => number,
       :body => alert_message,
     )
   end

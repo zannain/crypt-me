@@ -1,45 +1,49 @@
 require 'bigdecimal/util'
 require 'twilio-ruby'
-
 class Alert < ApplicationRecord
   belongs_to :user
   validates_presence_of :user_id
   validates_presence_of :alert_currency
-  validates_presence_of :alert_min
-  validates_presence_of :alert_max
+  validates :alert_min, presence: true #, numericality: { only_integer: true, greater_than: 0 }
+  validates :alert_max, presence: true #, numericality: { only_integer: true, greater_than: 0, less_than_or_equal_to: 100 }
   validates_presence_of :alert_id
   validates_presence_of :alert_interval
   validates_presence_of :alert_expiration
-  
-# Using the expiration_timestamp, compared aainst the present to determine if the alert has expired
-def expired?
- self.alert_expiration > Time.now
-end
+  validate :alert_expiration_check, :alert_range_check
 
-# gets the current value of the alert by querying the name of cryptocurrency
-def get_value(id)
-  crypto = (HTTParty.get("https://api.coinmarketcap.com/v1/ticker/#{self.alert_id}/")).parsed_response
-  "#{crypto[0]['price_usd']}"
-end
+  # Using the expiration_timestamp, compared aainst the present to determine if the alert has expired
+  def expired?
+    self.alert_expiration < DateTime.now
+  end
+
+  # gets the current value of the alert by querying the name of cryptocurrency
+  def get_value
+    crypto = (HTTParty.get("https://api.coinmarketcap.com/v1/ticker/#{self.alert_id}/")).parsed_response
+    crypto[0]['price_usd']
+  end
 
   def percent_changed
-    convert_to_decimal = self.get_value(self).to_d
+    convert_to_decimal = BigDecimal(self.get_value)
     ((convert_to_decimal - self.alert_value)/self.alert_value)* 100
   end
 
-  def send_message(alert_message)
-    @twilio_number = ENV['TWILIO_NUMBER']
-    @client = Twilio::REST::Client.new ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN']
+  def send_message(alert_message, user)
+    @twilio_number = ENV['twilio_number']
+    @client = Twilio::REST::Client.new ENV['twilio_sid'], ENV['twilio_token']
 
-    @client.account.messages.create(
+    @client.api.account.messages.create(
       :from => @twilio_number,
       :to => user.phone_number,
       :body => alert_message,
     )
   end
+
+def alert_expiration_check
+  errors.add(:alert_expiration, "can't be in the past") if alert_expiration < DateTime.now
 end
 
-def get_value(id)
-  crypto = (HTTParty.get("https://api.coinmarketcap.com/v1/ticker/#{id}/")).parsed_response
-  "$#{crypto[0]['price_usd']}"
+def alert_range_check
+  errors.add(:alert_min, "must be less than the maximum percentage") if alert_min > alert_max
+  errors.add(:alert_max, "must be greater than the minimum percentage") if alert_min > alert_max
+end
 end

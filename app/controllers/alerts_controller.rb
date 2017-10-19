@@ -7,7 +7,7 @@ class AlertsController < ApplicationController
 
   # search for a cryptocurrency
   def search
-    @crypto = HTTParty.get("https://api.coinmarketcap.com/v1/ticker/?limit=10")
+    @crypto = HTTParty.get("https://api.coinmarketcap.com/v1/ticker/")
     @currency = params[:currency]
     @currency_value = params[:currency_value]
     @crypto_id = params[:crypto_id]
@@ -16,13 +16,14 @@ class AlertsController < ApplicationController
   # list current_user alerts
   def index
     @alerts  = current_user.alerts
+    
   end
 
   # receives params for a new alert
   def create
     @alert = current_user.alerts.build(alert_params)
     if @alert.save!
-      redirect_to search_path, flash[:success] = 'Alert was successfully created.'
+      redirect_to search_path #, flash[:success] = 'Alert was successfully created.'
     else
       render :new
     end
@@ -43,7 +44,7 @@ class AlertsController < ApplicationController
   # update a alert
   def update
     if @alert.update_attributes(alert_params)
-      redirect_to alerts_path, flash[:success] = "Alert Updated!"
+      redirect_to alerts_path # flash[:success] = "Alert Updated!"
     else
       render 'edit'
     end
@@ -51,13 +52,12 @@ class AlertsController < ApplicationController
   # delete an alert based on params
   def destroy
     @alert.destroy
-    redirect_to alerts_url, flash[:success] = "Alert Deleted!"
+    redirect_to alerts_url #flash[:success] = "Alert Deleted!"
   end
 
   private
   # find a specific alert by params
   def set_alert
-    @user = current_user
     @alert = Alert.find(params[:id])
   end
 

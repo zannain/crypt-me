@@ -1,5 +1,6 @@
 <div class="container">
 <%= form_for(@alert, remote: true) do |f| %>
+<%= render 'shared/error_messages', object: f.object  %>
     <div class="row alert-time-currency">
         <div class="col alert-time form-group">
             <%= f.label :time, class: "col-form-label" %> 
@@ -35,12 +36,8 @@
             <%= f.label :direction, class: "col-form-label" %>
             <%= f.select :direction, ['up', 'down'], class: "form-control" %>
         </div>
-        <div class="col alert-range form-group">
-            <%= f.label  :alert_min, "Min", class: "col-form-label" %>
-            <%= f.select :alert_interval, ['hours', 'days', 'weeks'], class: "form-control" %>
-        </div>
-        <div class="col alert-range form-group">
-            <%= f.label  :alert_max, "Max", class: "col-form-label" %>
+        <div class="col alert-interval form-group">
+            <%= f.label  :alert_interval, class: "col-form-label" %>
             <%= f.select :alert_interval, ['hours', 'days', 'weeks'], class: "form-control" %>
         </div>       
     </div> 

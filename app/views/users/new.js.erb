@@ -1,4 +1,6 @@
-$('.modal-body').html("<%= j render 'form', url: signup_path%>");
+<% if params[:action] == 'new' %>
+<% end %>
 $('.modal-title').html("Signup");
 
+$('.modal-body').html("<%= j render 'form', url: signup_path %>");
 $('.modal').modal();

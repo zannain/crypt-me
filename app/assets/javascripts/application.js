@@ -30,5 +30,6 @@ $(document).on('turbolinks:load', function() {
 });
 $(".dropdown-toggle").dropdown();
 $("#search").dataTable();
+$('[data-toggle="tooltip"]').tooltip();
 });
 

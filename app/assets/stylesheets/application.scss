@@ -12,10 +12,11 @@
  *
  *= require_jquery
  *= require jquery-ui
- *= require_tree .
  *= require_self
+ *= require_tree .
  */
 @import "bootstrap";
+
 
 .ajax-submit {
 	visibility:hidden;

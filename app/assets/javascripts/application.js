@@ -12,9 +12,9 @@
 //
 //= require popper
 //= require rails-ujs
-//= require turbolinks
 //= require jquery3
 //= require jquery_ujs
+//= require turbolinks
 //= require bootstrap
 //= require_tree .
 
@@ -29,6 +29,6 @@ $(document).on('turbolinks:load', function() {
   	interval: 2000
 });
 $(".dropdown-toggle").dropdown();
-
+$("#dashboard_table").dataTable();
 });
 

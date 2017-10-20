@@ -26,8 +26,6 @@ gem 'twilio-ruby', '~> 5.4.0'
 
 group :production do
   gem 'rails_12factor'
-  gem 'jquery-rails'
-  gem 'jquery-ui-rails'
 end
 
 

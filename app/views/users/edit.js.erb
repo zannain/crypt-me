@@ -1,2 +1,7 @@
+<% if params[:action] == 'edit' && params[:controller] == 'users' %>     
+$(".modal-footer").empty();
+<% end %>
+$('.modal-title').html("Edit Account Settings")
 $('.modal-body').html("<%= j render 'form' %>");
 $('.modal').modal();
+$(".modal-footer").html("<button type='button' class='delete-button modal-btn btn btn-danger'>Delete Account</button><button type='button' class='update-button modal-btn btn btn-primary'>Update Account</button>");

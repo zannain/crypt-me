@@ -23,7 +23,7 @@
             <!--    Row: Rank   -->
             <td><%= result['rank'] %></td>
             <!--    Row: Currency -->
-            <td><%= result['name'] %></td>
+          <td id="currency-symbol" data-toggle="tooltip" title=<%= "#{result['symbol']}" %> data-placement="top"><%= result['name'] %></td>
             <!--    Row: Price(USD)   -->
             <td ><%= number_to_currency(result['price_usd']) %></td>
             <!--    Row: Price(BTC)  -->

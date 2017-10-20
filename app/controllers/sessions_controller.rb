@@ -14,9 +14,9 @@ class SessionsController < ApplicationController
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       # redirect_to user
-      redirect_back_or root_path
+      
       # flash[:success]="Logged In!"
-      format.html { redirect_to root_path }
+      format.html { redirect_back_or root_path }
       format.js 
     else
       # flash[:danger] = 'Invalid email/password combination'

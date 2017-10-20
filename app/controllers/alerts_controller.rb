@@ -7,7 +7,7 @@ class AlertsController < ApplicationController
 
   # search for a cryptocurrency
   def search
-    @crypto = HTTParty.get("https://api.coinmarketcap.com/v1/ticker/")
+    @crypto = HTTParty.get("https://api.coinmarketcap.com/v1/ticker/?limit=100")
     @currency = params[:currency]
     @currency_value = params[:currency_value]
     @crypto_id = params[:crypto_id]

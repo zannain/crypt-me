@@ -13,7 +13,17 @@ namespace :alert do
           alert.send_message("#{alert.alert_currency} is currently #{alert.direction} by #{new_percent_delta.round(2)}%", number)
         end
       end
-        alert.send_message("#{alert.alert_currency} is currently #{alert.direction} by #{new_percent_delta.round(2)}%", number)
+      alert.send_message("#{alert.alert_currency} is currently #{alert.direction} by #{new_percent_delta.round(2)}%", number)
     end
+  end
+  desc "Test Alert"
+  task :test_alert => :environment do
+    @client = Twilio::REST::Client.new(ENV["TWILIO_TEST_SID"],ENV["TWILIO_TEST_TOKEN"])
+    message = @client.messages.create(
+      to: '+15103660195',
+      from: '+15005550006',
+      body: 'Test alert'
+    )
+    puts message.sid
   end
 end

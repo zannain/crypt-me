@@ -9,7 +9,7 @@ class Alert < ApplicationRecord
   validates_presence_of :alert_id
   validates_presence_of :alert_interval
   validates_presence_of :alert_expiration
-  validate :alert_expiration_check, :alert_range_check
+  # validate :alert_expiration_check, :alert_range_check
 
   # Using the expiration_timestamp, compared aainst the present to determine if the alert has expired
   def expired?

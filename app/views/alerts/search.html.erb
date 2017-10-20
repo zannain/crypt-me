@@ -1,10 +1,11 @@
 
-<table id="alerts" class="table table-bordered table-hover table-responsive">
+<table id="search" class="table table-bordered table-striped table-hover table-responsive">
   <thead class="thead-default">
     <tr>
       <th>Rank</th>
+      <th>Currency</th>
       <th>Price (USD)</th>
-      <th>Price (Bitcoin)</th>
+      <th>Price (BTC)</th>
       <th>24 Hour Volume (USD)</th>
       <th>Market Cap (USD)</th>
       <th>Available Supply</th>
@@ -15,12 +16,14 @@
       <th></th>
       
     </thead>
-    <tbody>
 
+    <tbody>
       <% @crypto.each do |result| %>
        <tr>
             <!--    Row: Rank   -->
             <td><%= result['rank'] %></td>
+            <!--    Row: Currency -->
+            <td><%= result['name'] %></td>
             <!--    Row: Price(USD)   -->
             <td ><%= number_to_currency(result['price_usd']) %></td>
             <!--    Row: Price(BTC)  -->

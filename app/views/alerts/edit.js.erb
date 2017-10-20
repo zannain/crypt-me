@@ -1,5 +1,8 @@
+<% if params[:action] == 'edit' %>
+$(".modal-btn").html("Update Alert");
+<% end %>
 $('.modal-body').html("<%= j render 'form' %>");
-$('.modal-title').html('Edit "<%= j @alert.alert_currency %>" Alert');
+$('.modal-title').html('Edit <%= j @alert.alert_currency %> Alert');
 
 $( "#slider-range" ).slider({
       range: true,

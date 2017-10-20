@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   has_many :alerts, dependent: :destroy
+  validates :phone_number, presence: true
+  validate :phone_is_valid?
 
   # Returns the hash digest of the given string.
   def User.digest(string)
@@ -37,8 +39,21 @@ class User < ApplicationRecord
   def feed
     Micropost.where("user_id = ?", id)
   end
-  # Forgets a user.
+  # Forgets a user
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  def phone_is_valid?
+    @client =Twilio::REST::Client.new(ENV["TWILIO_SID"],ENV["TWILIO_TOKEN"])
+    begin
+      number = @client.lookups.v1.phone_numbers(self.phone_number).fetch(country_code: 'US', type: 'carrier')
+      return true if (number.carrier['type'] == 'mobile' && number.country_code == 'US')
+    raise
+        puts e.inspect
+    rescue
+      errors.add(:phone_number, "must be a validate US mobile phone number")
+      return false
+    end
   end
 end

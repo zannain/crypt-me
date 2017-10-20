@@ -43,7 +43,7 @@ def alert_expiration_check
 end
 
 def alert_range_check
-  errors.add(:alert_min, "must be less than the maximum percentage") if alert_min > alert_max
-  errors.add(:alert_max, "must be greater than the minimum percentage") if alert_min > alert_max
+  errors.add(:alert_min, "must be less than the maximum percentage") if :alert_min > :alert_max
+  errors.add(:alert_max, "must be greater than the minimum percentage") if :alert_min > :alert_max
 end
 end

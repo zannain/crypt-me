@@ -23,7 +23,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'bootstrap', '~> 4.0.0.beta'
 gem 'twilio-ruby', '~> 5.4.0'
-
+gem 'client-side-validations'
 group :production do
   gem 'rails_12factor'
 end
@@ -34,7 +34,7 @@ group :development, :test do
   gem 'capybara', '~> 2.13'                           # Adds support for Capybara system testing and selenium driver
   gem 'selenium-webdriver'
   gem 'hirb'
-  gem 'pry-rails'
+  gem 'pry-rails', require: "ap"
   gem 'rails-erd'
 end
 
@@ -43,5 +43,8 @@ group :development do
   gem 'spring'                        # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem "awesome_print", require:"ap"
 end
 

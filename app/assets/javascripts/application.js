@@ -15,8 +15,8 @@
 //= require jquery3
 //= require jquery_ujs
 //= require datatables
-//= require turbolinks
 //= require bootstrap
+//= require turbolinks
 //= require_tree .
 function changePercentageColumnClass(percentColumn) {
 	for(var i = 0; i < percentColumn.length; i++) {

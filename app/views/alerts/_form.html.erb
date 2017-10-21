@@ -7,13 +7,14 @@
         </div>
         <div class="col alert-currency form-group">
             <%= f.label :currency, class: "col-form-label" %>
-            <%= f.text_field :alert_currency, class: "form-control", value: "$#{@currency}", id: "alert-currency" %>
+            <%= f.text_field :alert_currency, class: "form-control", value: @currency, id: "alert-currency" %>
         </div>
     </div>
 
     <div class="alert-value form-group">
         <%= f.label :currency_value, class: "col-form-label" %>
-        <%= f.text_field :alert_value, class: "form-control", value: "#{@currency_value}", id: "alert-value"  %>
+        <%= f.text_field :alert_value, class: "form-control", value: @currency_value, id: "alert-value" %>
+
     </div>
     
     <div class="alert-range row" id="slider-input">
@@ -47,6 +48,6 @@
     </div>
         <%= f.hidden_field :alert_id,  value: @crypto_id, id: 'alert-id' %>
         <%= f.submit "Create Alert", class: 'ajax-submit' %>
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
 <% end %>

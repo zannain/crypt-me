@@ -10,14 +10,21 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require popper
 //= require rails-ujs
 //= require jquery3
-//= require jquery_ujs
+//= require popper
+//= require bootstrap-sprockets
+//= require jquery-ui/widgets/datepicker
+//= require jquery-ui/widgets/slider
+//= require jquery-ui/core
+//= require jquery-ui/widgets/mouse
 //= require datatables
-//= require bootstrap
+//= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//
+
+
 function changePercentageColumnClass(percentColumn) {
 	for(var i = 0; i < percentColumn.length; i++) {
         if (percentColumn[i].innerHTML > 0) {
@@ -40,7 +47,6 @@ function convertPercentageColumnToPercents(percentColumn) {
 
 $(document).on('turbolinks:load', function() {
   // console.log('document is ready!', new Date());
-
   $('#login_email').focus();
    $('.modal-footer .btn-primary').click(function() {
     $('.modal-body form').submit();
@@ -54,6 +60,6 @@ $('[data-toggle="tooltip"]').tooltip();
 // Change Percentage Columns Classes Based on Values
 var delta = document.getElementsByClassName("crypto-delta");
 changePercentageColumnClass(delta);
-convertPercentageColumnToPercents(delta);
+// convertPercentageColumnToPercents(delta);
 });
 

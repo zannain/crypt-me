@@ -20,7 +20,7 @@
         <% @alerts.each do |alert| %>
           <tr>
             <td><%= alert.alert_currency%></td>
-            <td><%= alert.get_value %></td>
+            <td><%= "#{alert.get_value}" %></td>
             <td><%= alert.alert_value %></td>
             <td><%= "#{alert.percent_changed.round(2)}%" %></td>
             <td><%= alert.direction.capitalize %></td>

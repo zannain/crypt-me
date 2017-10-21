@@ -22,7 +22,7 @@ gem 'nokogiri'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-datatables'
-gem 'bootstrap', '~> 4.0.0.beta'
+gem 'bootstrap', '~> 4.0.0.beta2'
 gem 'twilio-ruby', '~> 5.4.0'
 
 

@@ -12,16 +12,12 @@ before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
 
   def create
     @user = User.new(user_params)
-    respond_to do |format|
     if @user.save
       log_in @user
-      # flash[:success] = "Welcome to CryptMe!"
-      format.html { redirect_to root_path }
-      format.js 
+      redirect_to root_path 
+      flash.now[:success] = "Welcome to CryptMe!"
     else
-      format.html { render :action => 'new' }
-      format.js { render :action => 'new' }
-    end
+      render :new
   end
   end
 
@@ -31,8 +27,9 @@ before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
   def update
     if @user.update(user_params)
       redirect_to root_path
+      flash[:success] = "Account Updated"
     else
-      # render :edit, flash[:info] = 'Looks like you are missing a few details'
+      flash.now[:info] = 'Looks like you are missing a few details'
     end
   end
   

@@ -15,9 +15,8 @@ class SessionsController < ApplicationController
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       # redirect_to user
       
-      # flash[:success]="Logged In!"
       format.html { redirect_back_or root_path }
-      format.js 
+      flash[:success]="Logged In!"
     else
       # flash[:danger] = 'Invalid email/password combination'
       format.html { render :action => 'new' }
@@ -29,6 +28,7 @@ class SessionsController < ApplicationController
   def destroy
     log_out if logged_in?
     redirect_to root_url
+    flash[:warning] = "Logged out"
   end
 
   private

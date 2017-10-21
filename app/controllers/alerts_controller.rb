@@ -4,7 +4,6 @@ class AlertsController < ApplicationController
   before_action :set_alert, only: [ :edit, :update, :destroy]
   before_action :new_alert, only: [:search, :new]
 
-
   # search for a cryptocurrency
   def search
     @crypto = HTTParty.get("https://api.coinmarketcap.com/v1/ticker/?limit=100")
@@ -16,14 +15,14 @@ class AlertsController < ApplicationController
   # list current_user alerts
   def index
     @alerts  = current_user.alerts
-    
   end
 
   # receives params for a new alert
   def create
     @alert = current_user.alerts.build(alert_params)
     if @alert.save!
-      redirect_to search_path #, flash[:success] = 'Alert was successfully created.'
+      redirect_to search_path 
+      flash.now[:success] = 'Alert was successfully created.'
     else
       render :new
     end
@@ -44,7 +43,8 @@ class AlertsController < ApplicationController
   # update a alert
   def update
     if @alert.update_attributes(alert_params)
-      redirect_to alerts_path # flash[:success] = "Alert Updated!"
+      redirect_to alerts_path # 
+      flash.now[:success] = "Alert Updated!"
     else
       render 'edit'
     end

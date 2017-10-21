@@ -16,6 +16,7 @@
  *= require_tree .
  */
 @import "bootstrap";
+@import 'datatables';
 
 
 .ajax-submit {
@@ -33,4 +34,8 @@
 
 .dropdown {
 	display:none;
+}
+
+th {
+	text-align: center;
 }

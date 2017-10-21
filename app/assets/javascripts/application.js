@@ -14,9 +14,29 @@
 //= require rails-ujs
 //= require jquery3
 //= require jquery_ujs
+//= require datatables
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
+function changePercentageColumnClass(percentColumn) {
+	for(var i = 0; i < percentColumn.length; i++) {
+        if (percentColumn[i].innerHTML > 0) {
+        percentColumn[i].classList.toggle("table-success");
+        }
+        else if (percentColumn[i].innerHTML < 0) {
+        	percentColumn[i].classList.toggle("table-danger");
+        }
+    }    
+}
+
+function convertPercentageColumnToPercents(percentColumn) {
+	for(var i=0; i< percentColumn.length; i++ ) {
+		num = Number(percentColumn[i].innerHTML);
+		num *= 100;
+		percent = Math.floor(num) + "%";
+		percentColumn[i].innerHTML = percent;
+	}
+}
 
 $(document).on('turbolinks:load', function() {
   // console.log('document is ready!', new Date());
@@ -31,5 +51,9 @@ $(document).on('turbolinks:load', function() {
 $(".dropdown-toggle").dropdown();
 $("#search").dataTable();
 $('[data-toggle="tooltip"]').tooltip();
+// Change Percentage Columns Classes Based on Values
+var delta = document.getElementsByClassName("crypto-delta");
+changePercentageColumnClass(delta);
+convertPercentageColumnToPercents(delta);
 });
 

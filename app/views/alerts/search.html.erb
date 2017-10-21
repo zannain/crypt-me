@@ -1,6 +1,6 @@
 
-<table id="search" class="table table-bordered table-striped table-hover table-responsive">
-  <thead class="thead-default">
+<table id="search" class="table table-responsive table-hover">
+  <thead>
     <tr>
       <th>Rank</th>
       <th>Currency</th>
@@ -19,30 +19,30 @@
 
     <tbody>
       <% @crypto.each do |result| %>
-       <tr>
+       <tr class="crypto">
             <!--    Row: Rank   -->
-            <td><%= result['rank'] %></td>
+            <td class="crypto-rank"><%= result['rank'] %></td>
             <!--    Row: Currency -->
-          <td id="currency-symbol" data-toggle="tooltip" title=<%= "#{result['symbol']}" %> data-placement="top"><%= result['name'] %></td>
+          <td id="crypto-symbol" data-toggle="tooltip" title=<%= "#{result['symbol']}" %> data-placement="top"><%= result['name'] %></td>
             <!--    Row: Price(USD)   -->
-            <td ><%= number_to_currency(result['price_usd']) %></td>
-            <!--    Row: Price(BTC)  -->
-            <td><%= number_to_currency(result['price_btc']) %></td>
+            <td class="crypto-usd"><%= number_to_currency(result['price_usd']) %></td>
+            <!--  Row: Price(BTC)  -->
+            <td class="crypto-btc"><%= number_to_currency(result['price_btc']) %></td>
             <!--    Row: 24 Hour Volume   -->
-            <td><%= number_to_currency(result['24h_volume_usd']) %></td>
+            <td class="crypto-volume"><%= number_to_currency(result['24h_volume_usd']) %></td>
             <!--    Row: Market Cap(USD)   -->
-            <td><%= number_to_currency(result['market_cap_usd']) %></td>
+            <td class="crypto-marketcap"><%= number_to_currency(result['market_cap_usd']) %></td>
             <!--    Row: (Available Supply)   -->
-            <td><%= number_to_currency(result['available_supply']) %></td>
+            <td class="crypto-available--supply"><%= number_to_currency(result['available_supply']) %></td>
             <!--    Row: Total Supply   -->
-            <td><%= number_to_currency(result['total_supply']) %></td>
+            <td class="crypto-total--supply"><%= number_to_currency(result['total_supply']) %></td>
             <!--    
             Row: Percent Change in 1 Hr   -->
-            <td><%= result['percent_change_1h'] %></td>
+            <td class="crypto-delta"><%= result['percent_change_1h'] %></td>
             <!--    Row: Percent Change in 24 Hours   -->
-            <td><%= result['percent_change_24h'] %></td>
+            <td class="crypto-delta"><%= result['percent_change_24h'] %></td>
             <!--    Row:  Percent Change in 7 Days  -->
-            <td><%= result['percent_change_7d'] %></td>
+            <td class="crypto-delta"><%= result['percent_change_7d'] %></td>
             <td><%= link_to "Alert Me", "#{new_alert_path}?crypto_id=#{result["id"]}&currency=#{result['name']}&currency_value=#{result['price_usd']}", remote: true %></td>
         </tr>
       <% end %>

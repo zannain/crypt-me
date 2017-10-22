@@ -16,6 +16,8 @@
 <%= f.password_field :password_confirmation, class:'form-control' %>
 
   <%= f.submit 'Create my account', class: 'ajax-submit btn btn-success' %>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  
     <% if params[:action] == 'new'  %> 
       <p class='already text-left'>Already a User?
       <%= link_to 'Login', login_path, id:'already-login', remote:true %>

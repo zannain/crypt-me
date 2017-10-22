@@ -1,51 +1,20 @@
-<% if params[:action] == 'edit' %>
 $(".modal-btn").html("Update Alert");
-<% end %>
 $('.modal-body').html("<%= j render 'form' %>");
 $('.modal-title').html('Edit <%= j @alert.alert_currency %> Alert');
+$('.alert-currency').val("<%= j @alert.alert_currency %>");
+$('.alert-value').val("<%= j @alert.get_value %>");
+setSliderValues();
+var sliderMin = $(".alert-slider").slider("values",0);
+var sliderMax= $(".alert-slider").slider("values",1);
+$("#alert-id").val("<%= j @alert.alert_id %>");
+$(".alert-min--badge" ).html(sliderMin);
+$(".alert-max--badge" ).html(sliderMax);
+$(".alert-min--badge" ).val(sliderMin);  // update min-alert badge FIELD
+$(".alert-max--badge" ).val(sliderMax);  // update max-aert badge FIELD
+$(".alert-min" ).val(calculateRange(sliderMin, $(".alert-value").val())); // calculate & update alert-min input
+$(".alert-max").val(calculateRange(sliderMax, $(".alert-value").val()));  // calculate & update alert-max input
 
-$( "#slider-range" ).slider({
-      range: true,
-      min: 0,
-      max: 100,
-      step: 5,
-      values: [ 25, 75 ],
-      slide: function( event, ui ) {
-        $( "#alert-min" ).val(ui.values[0] + "%");
-        $( "#alert-max" ).val(ui.values[1] + "%");
-      }
-    });
-
-    var $currentValueField = $('#alert-value');
-    var url = 'https://api.coinmarketcap.com/v1/ticker/';
-    function currentValue(name) {
-      let currency = "<%= j @alert.alert_id %>";
-      let urlToRequest = url + currency + "/";
-      $.ajax({
-        url: urlToRequest,
-        type: 'GET',
-        dataType: 'json',
-        success(response) {
-          $("#alert-value").val('$' + parseFloat(response[0][name]).toFixed(2));
-        }
-          ,error(jqXHR, status, errorThrown) {
-          console.log(jqXHR);
-        }
-      });
-    }
-
-    function update(name) {
-      $currentValueField.empty();
-      currentValue(name);
-      return false;
-    }
-
-    $("#alert-id").val("<%= j @alert.alert_id %>");
-    $("#alert-min" ).val($("#slider-range").slider("values",0) + '%');
-    $("#alert-max").val($("#slider-range").slider("values",1) + '%');
-    $("#alert-currency").val("<%= j @alert.alert_currency %>");
-    $("#alert-value").val(update("price_usd"));
-    $('#alert-datepicker').val("<%= @alert.alert_expiration.strftime("%A, %B %e %Y") %>")
-    $('#alert-datepicker').datepicker({dateFormat: "DD, MM d, yy"});
+$('#datepicker').val("<%= @alert.alert_expiration.strftime("%A, %B %e %Y") %>")
+$('#datepicker').datepicker({dateFormat: "DD, MM d, yy"});
 $('.modal').modal();
-    
+

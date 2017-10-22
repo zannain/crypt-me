@@ -9,25 +9,24 @@ class Alert < ApplicationRecord
   validates_presence_of :alert_id
   validates_presence_of :alert_interval
   validates_presence_of :alert_expiration
-  validate :alert_expiration_check, :alert_range_check
+  validate :expired?
 
-  # Using the expiration_timestamp, compared aainst the present to determine if the alert has expired
-  def expired?
-    self.alert_expiration < DateTime.now
-  end
-
+# Using the expiration_timestamp, compared aainst the present to determine if the alert has expired
+def expired?
+  self.alert_expiration < DateTime.now
+end
   # gets the current value of the alert by querying the name of cryptocurrency
-  def get_value
-    crypto = (HTTParty.get("https://api.coinmarketcap.com/v1/ticker/#{self.alert_id}/")).parsed_response
-    crypto[0]['price_usd']
-  end
+def get_value
+  crypto = (HTTParty.get("https://api.coinmarketcap.com/v1/ticker/#{self.alert_id}/")).parsed_response
+  crypto[0]['price_usd']
+end
 
-  def percent_changed
+def percent_changed
     convert_to_decimal = BigDecimal(self.get_value)
     ((convert_to_decimal - self.alert_value)/self.alert_value)* 100
   end
 
-  def send_message(alert_message, number)
+def send_message(alert_message, number)
     @twilio_number = ENV["TWILIO_NUMBER"]
     @client = Twilio::REST::Client.new ENV["TWILIO_SID"],ENV["TWILIO_TOKEN"]
 
@@ -38,10 +37,6 @@ class Alert < ApplicationRecord
     )
   end
 
-def alert_expiration_check
-  errors.add(:alert_expiration, "can't be in the past") if alert_expiration < DateTime.now
-end
-
 def alert_range_check
   if alert_min > alert_max
     errors.add(:alert_min, "must be less than alert max percentage")
@@ -49,5 +44,4 @@ def alert_range_check
     return true
   end
 end
-
 end

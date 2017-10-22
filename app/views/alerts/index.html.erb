@@ -1,18 +1,13 @@
-<div class="full_dashboard">
-  <h1 class="dashboard">Welcome <%= "#{current_user.name}"%></h1>
-  <div class="row">
-    <div class="dashboard_table col-xs-12 col-sm-12">
-      <table id="dashboard_table" class="table table-bordered table-hover table-responsive">
+<div class="container">
+  <h1>Welcome <%= "#{current_user.name}"%></h1>
+  <h3>Your Alerts!</h3>
+      <table class="table table-bordered table-hover table-responsive">
         <thead>
-        <tr>
-          <th class="dashboard_header" colspan="9">Your Alerts!</th>
-        </tr>
         <tr>
           <th>Symbol</th>
           <th>Price (USD)</th>
           <th>Starting Price</th>
           <th>Percent Change</th>
-          <th>Alert Direction</th>
           <th colspan="2"></th>
         </tr>
         </thead>
@@ -20,21 +15,17 @@
         <% @alerts.each do |alert| %>
           <tr>
             <td><%= alert.alert_currency%></td>
-            <td><%= "#{alert.get_value}" %></td>
+            <td><%= alert.get_value %></td>
             <td><%= alert.alert_value %></td>
-            <td><%= "#{alert.percent_changed.round(2)}%" %></td>
-            <td><%= alert.direction.capitalize %></td>
-            <td><%= link_to "Edit", edit_alert_path(alert), class:"btn btn-info", remote: true  %>
-            <%= link_to "Delete", alert, class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }  %>
+            <td><%= alert.percent_changed.round(2) %></td>
+            <td>
+              <%= link_to "Edit", edit_alert_path(alert), class:"btn btn-info", remote: true  %>
+              <%= link_to "Delete", alert, class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure?'}  %>
             </td>
         <% end %>
           </tr>
           </tbody>
       </table>
-    </div>
   </div>
-  </div>
-
-
 <%= render :partial => 'shared/modal' %>
 

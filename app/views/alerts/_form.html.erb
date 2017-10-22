@@ -1,53 +1,58 @@
 
+<div class="container alert">
 <%= form_for(@alert, remote: true) do |f| %>
     <div class="row alert-time-currency">
-        <div class="col alert-time form-group">
+        <div class="col form-group">
             <%= f.label :time, class: "col-form-label" %> 
-            <%= f.text_field :created_at, class: "form-control", value: "#{DateTime.now.strftime('%I:%M %p')}"  %>
+            <%= f.text_field :created_at, class: "alert-createdat form-control", value: "#{DateTime.now.strftime('%I:%M %p')}"  %>
         </div>
-        <div class="col alert-currency form-group">
+        <div class="col form-group">
             <%= f.label :currency, class: "col-form-label" %>
-            <%= f.text_field :alert_currency, class: "form-control", value: @currency, id: "alert-currency" %>
+            <%= f.text_field :alert_currency, class: "alert-currency form-control", value: @currency%>
         </div>
     </div>
 
-    <div class="alert-value form-group">
+    <div class="form-group">
         <%= f.label :currency_value, class: "col-form-label" %>
-        <%= f.text_field :alert_value, class: "form-control", value: @currency_value, id: "alert-value" %>
-
+        <%= f.text_field :alert_value, class: "alert-value form-control", value: @currency_value %>
     </div>
     
-    <div class="alert-range row" id="slider-input">
+    <div class="row" id="slider-input">
         <div class="col form-group">
             <%= f.label :alert_min, class: "col-form-label" %>
-            <%= f.text_field :alert_min, class: "form-control", id: "alert-min"%>
+            <%= f.text_field :alert_min, class: "alert-min form-control" %>
+            <%= f.hidden_field :alert_min, class: 'alert-min--badge' %>
         </div>
         <div class="col form-group">
             <%= f.label :alert_max, class: "col-form-label"%>
-            <%= f.text_field :alert_max, class: 'form-control', id: "alert-max" %>
+            <input class="alert-max form-control" type="text" name="alert[alert_min]">
+            <%= f.hidden_field :alert_max, class: 'alert-max--badge' %>
         </div>
         <br>
     </div>
 
-    <div id="slider-range" class="form-group"></div>
-            
-    <div class="row alert-direction-range">
-        <div class="col alert-direction form-group">
-            <%= f.label :direction, class: "col-form-label" %>
-            <%= f.select :direction, ['up', 'down'], class: "form-control" %>
-        </div>
-        <div class="col alert-interval form-group">
+    <div class="row justify-content-md-center">
+        <span class="col-sm-auto alert-min--badge badge badge-pill badge-success m-1"></span>
+        <p class="alert-slider col-sm-8 form-group"></p>
+        <span class="col-sm-auto alert-max--badge badge badge-pill badge-success m-1"></span>
+    </div>
+    
+        <!-- <div class="col alert-direction form-group"> -->
+            <%# f.label :direction, class: "col-form-label" %>
+            <%# f.select :direction, ['up', 'down'], class: "alert-direction form-control" %>
+        <!-- </div> -->
+        <div class="alert-interval form-group">
             <%= f.label  :alert_interval, class: "col-form-label" %>
-            <%= f.select :alert_interval, ['hours', 'days', 'weeks'], class: "form-control" %>
+            <%= f.select :alert_interval, ['hourly', 'daily', 'weekly'], class: "alert-interval form-control" %>
         </div>       
-    </div> 
 
     <div class="alert-expiration form-group">
         <%= f.label  :alert_expiration, class: "col-form-label" %>
-        <%= f.text_field :alert_expiration , class: "form-control", id: 'alert-datepicker', placeholder: "Time Value" %>
+        <%= f.text_field :alert_expiration , class: "alert-expiration form-control", id: 'datepicker', placeholder: "Time Value" %>
     </div>
         <%= f.hidden_field :alert_id,  value: @crypto_id, id: 'alert-id' %>
         <%= f.submit "Create Alert", class: 'ajax-submit' %>
-              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
 <% end %>
+</div>

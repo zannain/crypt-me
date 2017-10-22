@@ -24,42 +24,75 @@
 //= require_tree .
 //
 
+var delta = document.getElementsByClassName("crypto-delta");  // ALL DELTA COLUMNS
+var search = document.getElementById("search");               // ENTIRE SEARCH TABLE
+const coinmarket = "https://api.coinmarketcap.com/v1/ticker/";  // COINMARKETCAP BASE URL
 
-function changePercentageColumnClass(percentColumn) {
-	for(var i = 0; i < percentColumn.length; i++) {
+changePercentageColumnClass = (percentColumn) => { // Function that changes column color of Delta columns
+  for(var i = 0; i < percentColumn.length; i++) {
         if (percentColumn[i].innerHTML > 0) {
         percentColumn[i].classList.toggle("table-success");
         }
         else if (percentColumn[i].innerHTML < 0) {
-        	percentColumn[i].classList.toggle("table-danger");
+          percentColumn[i].classList.toggle("table-danger");
         }
-    }    
+    }
+  }
+calculateRange = (sliderVal, currentValue) => ((1 + sliderVal/100) * currentValue).toFixed(2);
+setSliderValues = () => { // Function to set Slider Values in Alert Min/Max Input Fields
+  $( ".alert-slider" ).slider({
+      range: true,
+      min: 0,
+      max: 100,
+      step: 5,
+      values: [ 25, 75 ],
+      slide: function( event, ui ) {
+        $( ".alert-min" ).val(calculateRange(ui.values[0], $(".alert-value").val()));
+        $( ".alert-max" ).val(calculateRange(ui.values[1], $(".alert-value").val()));
+        $( ".alert-max--badge" ).html(ui.values[1]);
+        $( ".alert-min--badge" ).html(ui.values[0]);
+      }
+    });}
+callCoinMarketCap = (value, id) => {
+  var urlToRequest = coinmarket + id + "/";
+  fetch(urlToRequest).then(response => {
+    if (response.ok) {
+      console.log(response.json());
+    }
+    throw new Error('Request failed');  // handle errors 
+  }, networkError => console.log(networkError.message))
+  .then(jsonResponse => {  //handle successes 
+    return jsonResponse[0];
+  });
 }
-
-function convertPercentageColumnToPercents(percentColumn) {
-	for(var i=0; i< percentColumn.length; i++ ) {
-		num = Number(percentColumn[i].innerHTML);
-		num *= 100;
-		percent = Math.floor(num) + "%";
-		percentColumn[i].innerHTML = percent;
-	}
-}
-
+// When TurboLinks Loads
 $(document).on('turbolinks:load', function() {
-  // console.log('document is ready!', new Date());
-  $('#login_email').focus();
-   $('.modal-footer .btn-primary').click(function() {
-    $('.modal-body form').submit();
-  }); 
-  $('.carousel').carousel({
-  	interval: 2000
-});
-$(".dropdown-toggle").dropdown();
-$("#search").dataTable();
-$('[data-toggle="tooltip"]').tooltip();
-// Change Percentage Columns Classes Based on Values
-var delta = document.getElementsByClassName("crypto-delta");
-changePercentageColumnClass(delta);
-// convertPercentageColumnToPercents(delta);
-});
+  $('#login_email').focus();  // Set focus on Login form to the email field
+  $('.modal-footer .btn-primary').click(function() { 
+  $('.modal-body form').submit();   // Submit form with Bootstrap-provided submit button on click
+  })
+  $('.carousel').carousel({ 
+    interval: 2000 // set the Header Carousel Interval
+  });
+  changePercentageColumnClass(delta); 
+  $("#search").dataTable(); // Convert CoinMarketCap Response to DataTable
+  $('[data-toggle="tooltip"]').tooltip();
+})
+
+
+// TODO Feature: User can set an alert for cryptocurrency deprecating in values
+  // calculateDownRange
+// TODO Function to convert CoinMarketCapi Response Delta Values to Percents
+  // function convertPercentageColumnToPercents(percentColumn) {
+  // for(var i=0; i< percentColumn.length; i++ ) {
+  //   num = Number(percentColumn[i].innerHTML);
+  //   num *= 100;
+  //   percent = Math.floor(num) + "%";
+  //   percentColumn[i].innerHTML = percent;
+  // }}
+  // convertPercentageColumnToPercents(delta);
+
+// TODO $(".dropdown-toggle").dropdown();
+
+
 

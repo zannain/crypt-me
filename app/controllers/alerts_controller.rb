@@ -3,6 +3,7 @@ require 'bigdecimal/util'
 class AlertsController < ApplicationController
   before_action :set_alert, only: [ :edit, :update, :destroy]
   before_action :new_alert, only: [:search, :new]
+  before_action :set_user
 
   # search for a cryptocurrency
   def search
@@ -10,6 +11,8 @@ class AlertsController < ApplicationController
     @currency = params[:currency]
     @currency_value = params[:currency_value]
     @crypto_id = params[:crypto_id]
+    @alerts = @user.alerts
+    
   end
 
   # list current_user alerts
@@ -42,6 +45,7 @@ class AlertsController < ApplicationController
   end
   # update a alert
   def update
+
     if @alert.update_attributes(alert_params)
       redirect_to alerts_path # 
       flash.now[:success] = "Alert Updated!"
@@ -57,6 +61,9 @@ class AlertsController < ApplicationController
 
   private
   # find a specific alert by params
+  def set_user
+    @user = current_user
+  end
   def set_alert
     @alert = Alert.find(params[:id])
   end
@@ -69,6 +76,8 @@ class AlertsController < ApplicationController
   # alert parameters
   def alert_params
     params.require(:alert).permit(
+      :display_min,
+      :display_max,
       :alert_id,
       :created_at,
       :alert_currency,

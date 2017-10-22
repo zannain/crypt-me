@@ -1,17 +1,19 @@
 $('.modal-body').html("<%= j render 'form', url: new_alert_path %>");
 $('.modal-title').html("Create an Alert");
-$( "#slider-range" ).slider({
-      range: true,
-      min: 0,
-      max: 100,
-      step: 5,
-      values: [ 25, 75 ],
-      slide: function( event, ui ) {
-        $( "#alert-min" ).val(ui.values[0] + "%");
-        $( "#alert-max" ).val(ui.values[1] + "%");
-      }
-    });
-    $( "#alert-min" ).val($("#slider-range").slider("values",0) + '%');
-    $("#alert-max").val($("#slider-range").slider("values",1) + '%');
-    $('#alert-datepicker').datepicker({dateFormat: "DD, d MM, yy"});
+$(".modal-btn").html("Create Alert");
+setSliderValues();
+var sliderMin = $(".alert-slider").slider("values",0);
+var sliderMax= $(".alert-slider").slider("values",1);
+
+$(".alert-min--badge" ).html(sliderMin);  // update min-alert badge
+$(".alert-max--badge" ).html(sliderMax);  // update max-aert badge
+$(".alert-min--badge" ).val(sliderMin);  // update min-alert badge
+$(".alert-max--badge" ).val(sliderMax);  // update max-aert badge
+
+$(".alert-min" ).val(calculateRange(sliderMin, $(".alert-value").val())); // calculate & update alert-min input
+$(".alert-max").val(calculateRange(sliderMax, $(".alert-value").val()));  // calculate & update alert-max input
+$('#datepicker').datepicker({dateFormat: "DD, MM d, yy"});
 $('.modal').modal();
+
+
+

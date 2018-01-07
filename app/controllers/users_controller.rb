@@ -1,6 +1,8 @@
+require 'confirmation_sender.rb'
+require 'code_generator.rb'
+
 class UsersController < ApplicationController
-before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
-  # before_action :correct_user,   only: [:edit, :update]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
   before_action :set_user,   only: [:index, :edit, :update]
 
   def index
@@ -14,8 +16,8 @@ before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      redirect_to root_path 
-      flash.now[:success] = "Welcome to CryptMe!"
+      ConfirmationSender.send_confirmation_to(@user)
+      redirect_to new_confirmation_path
     else
       render :new
   end

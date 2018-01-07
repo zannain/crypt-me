@@ -1,0 +1,8 @@
+<%= form_tag(confirmations_path, method: "post") do |f| %>
+  <%= label_tag :verification_code, "Verification Code" %>
+  <%= text_field_tag :verification_code %>
+  <%= hidden_field_tag :user_id, @user.id %>
+  <%= submit_tag 'Confirm' %>
+<% end %>
+
+

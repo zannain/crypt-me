@@ -10,18 +10,15 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     respond_to do |format|
-    if user && user.authenticate(params[:session][:password])
-      log_in user
-      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      # redirect_to user
-      
-      format.html { redirect_back_or root_path }
-      flash[:success]="Logged In!"
-    else
-      # flash[:danger] = 'Invalid email/password combination'
-      format.html { render :action => 'new' }
-      format.js { render :action => 'new' }
-    end
+      if (user && user.authenticate(params[:session][:password])) && (@user.verification_code == params[:verification_code])
+        log_in user
+        params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+        format.html { redirect_back_or root_path }
+        flash[:success]="Logged In!"
+      else
+        format.html { render :action => 'new' }
+        format.js { render :action => 'new' }
+      end
     end
   end
 

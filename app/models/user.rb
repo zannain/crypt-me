@@ -12,6 +12,7 @@ class User < ApplicationRecord
   validates :phone_number, presence: true
   # validate :phone_is_valid?
 
+  
   # Returns the hash digest of the given string.
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

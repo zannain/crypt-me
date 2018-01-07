@@ -14,7 +14,7 @@
 
     <div class="form-group">
         <%= f.label :currency_value, class: "col-form-label" %>
-        <%= f.text_field :alert_value, class: "alert-value form-control", value: @currency_value %>
+        <%= f.text_field :alert_value, class: "alert-value form-control", value: @currency_value %> 
     </div>
     
     <div class="row" id="slider-input">
@@ -37,10 +37,6 @@
         <span class="col-sm-auto alert-max--badge badge badge-pill badge-success m-1"></span>
     </div>
     
-        <!-- <div class="col alert-direction form-group"> -->
-            <%# f.label :direction, class: "col-form-label" %>
-            <%# f.select :direction, ['up', 'down'], class: "alert-direction form-control" %>
-        <!-- </div> -->
         <div class="alert-interval form-group">
             <%= f.label  :alert_interval, class: "col-form-label" %>
             <%= f.select :alert_interval, ['hourly', 'daily', 'weekly'], class: "alert-interval form-control" %>

@@ -4,15 +4,11 @@
     <tr>
       <th>Rank</th>
       <th>Currency</th>
-      <th>Price (USD)</th>
-      <th>Price (BTC)</th>
-      <th>24 Hour Volume (USD)</th>
-      <th>Market Cap (USD)</th>
-      <th>Available Supply</th>
-      <th>Total Supply</th>
-      <th>1 Hr %&Delta;</th>
-      <th>1 Day %&Delta;</th>
-      <th>7 Day %&Delta;</th>
+      <th>Price <span>(<%= fa_icon "usd" %>)</span></th>
+      <th>Price <span>(<%= fa_icon "btc" %>)</span></th>
+      <th>Hourly <span>(<%= fa_icon "percent" %>)</span></th>
+      <th>Weekly <span>(<%= fa_icon "percent" %>)</span></th>
+      <th>Daily <span>(<%= fa_icon "percent" %>)</span></th>
       <th></th>
       
     </thead>
@@ -20,22 +16,18 @@
     <tbody>
       <% @crypto.each do |result| %>
        <tr class="crypto">
-            <!--    Row: Rank   -->
-            <td class="crypto-rank"><%= result['rank'] %></td>
             <!--    Row: Currency -->
-          <td id="crypto-symbol" data-toggle="tooltip" title=<%= "#{result['symbol']}" %> data-placement="top"><%= result['name'] %></td>
+          <td 
+            id="crypto-symbol" 
+            data-toggle="tooltip" 
+            title= <%= "#{result['rank']}" %> 
+            data-placement="top">
+            <%= result['name'] %>
+          </td>
             <!--    Row: Price(USD)   -->
             <td class="crypto-usd"><%= number_to_currency(result['price_usd']) %></td>
             <!--  Row: Price(BTC)  -->
             <td class="crypto-btc"><%= number_to_currency(result['price_btc']) %></td>
-            <!--    Row: 24 Hour Volume   -->
-            <td class="crypto-volume"><%= number_to_currency(result['24h_volume_usd']) %></td>
-            <!--    Row: Market Cap(USD)   -->
-            <td class="crypto-marketcap"><%= number_to_currency(result['market_cap_usd']) %></td>
-            <!--    Row: (Available Supply)   -->
-            <td class="crypto-available--supply"><%= number_to_currency(result['available_supply']) %></td>
-            <!--    Row: Total Supply   -->
-            <td class="crypto-total--supply"><%= number_to_currency(result['total_supply']) %></td>
             <!--    
             Row: Percent Change in 1 Hr   -->
             <td class="crypto-delta"><%= result['percent_change_1h'] %></td>

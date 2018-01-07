@@ -3,43 +3,30 @@
   <thead>
     <tr>
       <th>Rank</th>
-      <th>Currency</th>
+      <th>Cryptocurrency</th>
       <th>Price <span>(<%= fa_icon "usd" %>)</span></th>
       <th>Price <span>(<%= fa_icon "btc" %>)</span></th>
       <th>Hourly <span>(<%= fa_icon "percent" %>)</span></th>
       <th>Weekly <span>(<%= fa_icon "percent" %>)</span></th>
       <th>Daily <span>(<%= fa_icon "percent" %>)</span></th>
       <th></th>
-      
     </thead>
-
-    <tbody>
-      <% @crypto.each do |result| %>
-       <tr class="crypto">
-            <!--    Row: Currency -->
-          <td 
-            id="crypto-symbol" 
-            data-toggle="tooltip" 
-            title= <%= "#{result['rank']}" %> 
-            data-placement="top">
-            <%= result['name'] %>
-          </td>
-            <!--    Row: Price(USD)   -->
-            <td class="crypto-usd"><%= number_to_currency(result['price_usd']) %></td>
-            <!--  Row: Price(BTC)  -->
-            <td class="crypto-btc"><%= number_to_currency(result['price_btc']) %></td>
-            <!--    
-            Row: Percent Change in 1 Hr   -->
-            <td class="crypto-delta"><%= result['percent_change_1h'] %></td>
-            <!--    Row: Percent Change in 24 Hours   -->
-            <td class="crypto-delta"><%= result['percent_change_24h'] %></td>
-            <!--    Row:  Percent Change in 7 Days  -->
-            <td class="crypto-delta"><%= result['percent_change_7d'] %></td>
-            <td><%= link_to "Alert Me", "#{new_alert_path}?crypto_id=#{result["id"]}&currency=#{result['name']}&currency_value=#{result['price_usd']}",class:"btn btn-success",  remote: true %>
-            </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
+    <% @crypto.each do |result| %>
+      <tr>
+        <td><%= result['rank'] %></td>
+        <td 
+          data-toggle="tooltip"
+          title= <%= "#{result['symbol']}" %> 
+          data-placement="top"><%= result['name'] %>
+        </td>
+      <td><%= number_to_currency(result['price_usd']) %></td>
+      <td><%= result['price_btc'] %> <span><%= fa_icon "btc" %></span></td>
+      <td class="crypto-delta"><%= result['percent_change_1h'] %></td>
+      <td class="crypto-delta"><%= result['percent_change_24h'] %></td>
+      <td class="crypto-delta"><%= result['percent_change_7d'] %></td>
+      <td><%= link_to "Alert Me", "#{new_alert_path}?crypto_id=#{result["id"]}&currency=#{result['name']}&currency_value=#{result['price_usd']}",class:"btn btn-success",  remote: true %>
+      </td>
+    </tr>
+    <% end %>
+</table>
 <%= render :partial => 'shared/modal' %>

@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   has_many :alerts, dependent: :destroy
   validates :phone_number, presence: true
-  validate :phone_is_valid?
+  # validate :phone_is_valid?
 
   # Returns the hash digest of the given string.
   def User.digest(string)

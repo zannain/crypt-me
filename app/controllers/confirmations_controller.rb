@@ -8,7 +8,6 @@ class ConfirmationsController < ApplicationController
     if @user.verification_code == params[:verification_code]
       session[:authenticated] = true
       flash[:notice] = "Get woke #{@user.name}!"
-      flash.now[:success] = "Welcome to CryptMe!"
       redirect_to root_path 
     else
       flash.now[:error] = "Verification code is incorrect."

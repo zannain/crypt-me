@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     respond_to do |format|
-      if (user && user.authenticate(params[:session][:password])) && (@user.verification_code == params[:verification_code])
+      if user && user.authenticate(params[:session][:password])
         log_in user
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         format.html { redirect_back_or root_path }
